@@ -1,0 +1,12 @@
+{
+    "name": "particula/back-end",
+    "description": "back end for the project",
+    "type": "project",
+    "require": {
+        "slim/slim": "4.x-dev",
+        "slim/psr7": "dev-master",
+        "illuminate/database": "^7.0@dev"
+    },
+    "license": "MIT",
+    "minimum-stability": "dev"
+}
