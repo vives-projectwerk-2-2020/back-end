@@ -5,7 +5,8 @@
     "require": {
         "slim/slim": "4.x-dev",
         "slim/psr7": "dev-master",
-        "illuminate/database": "^7.0@dev"
+        "illuminate/database": "^7.0@dev",
+        "php-di/php-di": "dev-master"
     },
     "license": "MIT",
     "minimum-stability": "dev"
