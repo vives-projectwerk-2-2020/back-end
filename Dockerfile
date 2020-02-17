@@ -5,7 +5,7 @@ FROM php:7.3.2
 WORKDIR /back-end
 
 # instal dpendecies
-RUN composer install
+#RUN composer install
 
 # copy in directory
 COPY . .
