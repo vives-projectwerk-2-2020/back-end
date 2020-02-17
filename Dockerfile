@@ -17,7 +17,7 @@ RUN composer install
 COPY . .
 
 # open poort
-EXPOSE 3000
+EXPOSE 6000
 
 # start server
-CMD php -S 0.0.0.0:3000
+CMD php -S 0.0.0.0:6000
