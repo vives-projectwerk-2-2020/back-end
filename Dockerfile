@@ -20,4 +20,4 @@ COPY . .
 EXPOSE 3000
 
 # start server
-CMD php -S localhost:3000
+CMD php -S 0.0.0.0:3000
