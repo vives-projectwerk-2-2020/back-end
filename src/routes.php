@@ -13,4 +13,6 @@ return function (App $app) {
         $response->getBody()->write(json_encode('hello world'));
         return $response;
     });
+    $app->get('/Home', '\HomeController:home');
+
 };
