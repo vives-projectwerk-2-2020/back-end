@@ -1,3 +1,7 @@
 /vendor/
+<<<<<<< HEAD
 .env
 phinx.yml
+=======
+.env
+>>>>>>> test-env
