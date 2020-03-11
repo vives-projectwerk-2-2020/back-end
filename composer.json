@@ -8,7 +8,8 @@
         "illuminate/database": "^7.0@dev",
         "php-di/php-di": "dev-master",
         "robmorgan/phinx": "dev-master",
-        "curl/curl": "dev-master"
+        "curl/curl": "dev-master",
+        "influxdb/influxdb-php": "dev-master"
     },
     "license": "MIT",
     "minimum-stability": "dev",

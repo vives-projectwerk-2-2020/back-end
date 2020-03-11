@@ -18,16 +18,14 @@ return function (App $app) {
         return $response;
     });
     $app->get('/foo', function (Request $request, Response $response) {
-        $curl = new Curl();
-        $curl->get('http://172.16.48.1:8086/query?db=particulaInfluxDB&q=select * from sensors');
-        if ($curl->response == false)
-        {
-            $response->getBody()->write("false");
-        } 
-        else
-        {
-            $response->getBody()->write(json_encode($curl->response));
-        }
+        //http://172.16.48.1:8086/query?db=particulaInfluxDB&q=select
+        $host = "172.16.48.1";
+        $port = 8086;
+        $client = new InfluxDB\Client($host, $port);
+        $database = $client->selectDB('particulaInfluxDB');
+        $result = $database->query('select * from sensors');
+        $response->getBody()->write(json_encode($result->getPoints()));
         return $response;
     });
+    //$app->get('/me')
 };
