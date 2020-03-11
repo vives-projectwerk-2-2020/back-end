@@ -9,7 +9,8 @@
         "php-di/php-di": "dev-master",
         "robmorgan/phinx": "dev-master",
         "curl/curl": "dev-master",
-        "influxdb/influxdb-php": "dev-master"
+        "influxdb/influxdb-php": "dev-master",
+        "vlucas/phpdotenv": "^4.1@dev"
     },
     "license": "MIT",
     "minimum-stability": "dev",

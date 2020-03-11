@@ -19,13 +19,11 @@ return function (App $app) {
     });
     $app->get('/foo', function (Request $request, Response $response) {
         //http://172.16.48.1:8086/query?db=particulaInfluxDB&q=select
-        $host = "172.16.48.1";
-        $port = 8086;
-        $client = new InfluxDB\Client($host, $port);
+        $client = new InfluxDB\Client(getenv('INFLUX_IP'), getenv('INFLUX_PORT'));
         $database = $client->selectDB('particulaInfluxDB');
         $result = $database->query('select * from sensors');
         $response->getBody()->write(json_encode($result->getPoints()));
         return $response;
     });
-    //$app->get('/me')
+    //$app->get('/measurements')
 };
