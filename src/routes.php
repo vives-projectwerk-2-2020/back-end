@@ -3,7 +3,7 @@
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
-// use App\Models\Sensor;
+use App\Models\Sensor;
 
 use Slim\App;
 
@@ -19,7 +19,7 @@ return function (App $app) {
     //     return $response;
     // });
     $app->get('/sensor', function (Request $request, Response $response) {
-        $sensor = App\Models\Sensor::all();
+        $sensor = Sensor::all();
         $jsonSensor = json_encode($sensor);
         $response->getBody()->write($jsonSensor);
         return $response;
