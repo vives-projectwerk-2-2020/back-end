@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: [ develop ]
 env:
-  IMAGE_NAME: particula-back-end
+  IMAGE_NAME: particula-back-end-dev
 jobs:
 
   build:
@@ -32,7 +32,7 @@ jobs:
         [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
         
         # Use Docker `latest` tag convention
-        [ "$VERSION" == "master" ] && VERSION=latest
+        [ "$VERSION" == "develop" ] && VERSION=latest
         
         # Convert IMAGE_ID to lowercase
         IMAGE_ID="${IMAGE_ID,,}"
