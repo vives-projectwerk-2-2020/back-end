@@ -2,7 +2,11 @@
 
 ## install
 
+```bash
 composer install
+# composer init
+```
+
 
 ## make .env
 
@@ -15,9 +19,13 @@ make sure your db_name in the env file is the same of the one you use for your m
 
 ## to start-up
 
-vendor/bin/phinx migrate
+```bash
+vendor/bin/phinx migrate  
 php -S localhost:3000 -t public
+```
 
 ## create new table
 
+```bash
 vendor/bin/phinx create MyNewMigration
+```
