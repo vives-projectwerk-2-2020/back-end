@@ -56,5 +56,5 @@ jobs:
         port: ${{ secrets.PORT }}
         script: |
           cd ${{ secrets.PATH }}
-          docker-compose pull
+          docker-compose pull backend
           docker-compose up -d backend
