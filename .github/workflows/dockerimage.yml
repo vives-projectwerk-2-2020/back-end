@@ -41,3 +41,20 @@ jobs:
         echo VERSION=$VERSION
         docker tag image $IMAGE_ID:$VERSION
         docker push $IMAGE_ID:$VERSION
+        
+  deploy:
+    name: deploy
+    needs: [push]
+    runs-on: ubuntu-latest
+    steps:
+    - name: executing remote ssh commands using password
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.KEY }}
+        port: ${{ secrets.PORT }}
+        script: |
+          cd ${{ secrets.PATH }}
+          docker-compose pull
+          docker-compose up -d backend
