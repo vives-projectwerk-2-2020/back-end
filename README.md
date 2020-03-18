@@ -4,7 +4,6 @@
 
 ```bash
 composer install
-# composer init
 ```
 
 
