@@ -6,7 +6,6 @@
 composer install
 ```
 
-
 ## make .env
 
 coppy the .env.examble  
