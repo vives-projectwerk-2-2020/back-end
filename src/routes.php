@@ -50,8 +50,27 @@ return function (App $app) {
         }
         //untested
         $new_date = $period_time . $period_range;
-        $result = $database->query("select * WHERE \"sensor_id\" = \"$id\" AND \"time\" > now() - $new_date");
+        $result = $database->query("select pm10,pm25,temperature,humidity FROM WHERE sensor_id = $id AND time > now() - $new_date");
         $response->getBody()->write(json_encode($result->getPoints()));
+        return $response;
+    });
+    $app->get('/sensors', function($request, $response)
+    {
+        $client = new InfluxDB\Client(getenv('INFLUX_IP'), getenv('INFLUX_PORT'));
+        $database = $client->selectDB('particulaInfluxDB');
+        $result = $database->query('select pm10,sensor_id FROM sensors');
+        $decoded = $result->getPoints();
+        //remove valies that dont neet to get send
+        for ($i = 0;$i < count($decoded);$i++)
+        {
+            unset($decoded[$i]['pm10']);
+            unset($decoded[$i]['time']);
+        }
+        // foreach($decoded as $id => $row) {
+        //     echo $row['pm10'];
+        //     unset($row['pm10']);
+        // }
+        $response->getBody()->write(json_encode($decoded));
         return $response;
     });
 };
