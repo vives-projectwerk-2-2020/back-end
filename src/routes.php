@@ -50,7 +50,7 @@ return function (App $app) {
         }
         //untested
         $new_date = $period_time . $period_range;
-        $result = $database->query("select pm10,pm25,temperature,humidity FROM WHERE sensor_id = $id AND time > now() - $new_date");
+        $result = $database->query("select pm10,pm25,temperature,humidity FROM sensors WHERE sensor_id = $id AND time > now() - $new_date");
         $response->getBody()->write(json_encode($result->getPoints()));
         return $response;
     });
