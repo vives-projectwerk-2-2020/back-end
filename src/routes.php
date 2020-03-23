@@ -4,6 +4,7 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
 use App\Models\Sensor;
+use App\Models\Location;
 
 use Slim\App;
 
@@ -12,25 +13,22 @@ return function (App $app) {
         $response->getBody()->write("Hello world!");
         return $response;
     });
-    // $app->post('/sensor', function (Request $request, Response $response) {
-    //     $data = $request->getParsedBody();
-    //     $sensor = Sensor::create($data);
-    //     $sensor->save();
-    //     return $response;
-    // });
+    $app->post('/sensor', function (Request $request, Response $response) {
+        $data = $request->getParsedBody();
+        $sensor = Sensor::create($data);
+        $sensor->save();
+        return $response;
+    });
     $app->get('/sensor', function (Request $request, Response $response) {
         $sensor = Sensor::all();
         $jsonSensor = json_encode($sensor);
         $response->getBody()->write($jsonSensor);
         return $response;
     });
+    $app->get('/location', function (Request $request, Response $response) {
+        $location = Location::all();
+        $jsonLocation = json_encode($location);
+        $response->getBody()->write($jsonLocation);
+        return $response;
+    });
 };
-// return function (App $app) {
-//     $app->get('/', function (Request $request, Response $response) {
-//         $response->getBody()->write(json_encode('hello world'));
-//         return $response;
-//     });
-//     // $app->get('/sensor/{id}', '\sensorController:sensor');
-//     
-
-// };

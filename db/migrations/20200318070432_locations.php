@@ -32,7 +32,8 @@ class Locations extends AbstractMigration
     public function change()
     {
         $table = $this->table('locations');
-        $table->addColumn('city', 'string')
+        $table
+            ->addColumn('city', 'string')
             ->addColumn('latitude', 'float')
             ->addColumn('longitude', 'float')
             ->addColumn('address', 'string')

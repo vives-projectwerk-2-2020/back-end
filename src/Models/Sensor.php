@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Sensor extends Model
 {
-    protected $fillable = ['latitude', 'longitude'];
+    protected $fillable = ['name', 'location_id', 'description'];
 }
