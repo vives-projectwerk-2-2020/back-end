@@ -31,9 +31,6 @@ jobs:
         # Strip "v" prefix from tag name
         [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
         
-        # Use Docker `latest` tag convention
-        [ "$VERSION" == "develop" ] && VERSION=latest
-        
         # Convert IMAGE_ID to lowercase
         IMAGE_ID="${IMAGE_ID,,}"
         
