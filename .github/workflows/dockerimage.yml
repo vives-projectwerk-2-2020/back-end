@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: [ develop ]
 env:
-  IMAGE_NAME: particula-back-end-dev
+  IMAGE_NAME: particula-back-end
 jobs:
 
   build:
