@@ -23,7 +23,7 @@ jobs:
         image_name: vives-projectwerk-2-2020/back-end/particula-back-end
         #image_tag: alpine-slim
         registry: docker.pkg.github.com
-        context: dockerimage
+        #context: .
 
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag image
