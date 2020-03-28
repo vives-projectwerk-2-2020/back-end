@@ -7,9 +7,6 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
 use Slim\App;
 
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/..');
-$dotenv->load();
-$dotenv->required(['PHP_URL']);
 
 return function (App $app) {
     $app->add(function (Request $request, RequestHandler $handler) {
