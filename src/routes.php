@@ -25,10 +25,4 @@ return function (App $app) {
         $response->getBody()->write($jsonSensor);
         return $response;
     });
-    $app->get('/location', function (Request $request, Response $response) {
-        $location = Location::all();
-        $jsonLocation = json_encode($location);
-        $response->getBody()->write($jsonLocation);
-        return $response;
-    });
 };
