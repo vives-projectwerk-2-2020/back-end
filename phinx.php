@@ -4,7 +4,7 @@ require __DIR__ . '/vendor/autoload.php';
 
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
-$dotenv->required(['DB_DRIVER', 'DB_HOST', 'DB_NAME', 'DB_USER', 'DB_PASSWORD']);
+$dotenv->required(['MYSQL_DRIVER', 'MYSQL_HOST', 'MYSQL_DATABASE', 'MYSQL_USER', 'MYSQL_PASSWORD']);
 
 return [
   'paths' => [
@@ -15,11 +15,11 @@ return [
     'default_migration_table' => 'phinxlog',
     'default_database' => 'dev',
     'dev' => [
-      'adapter' => getenv('DB_DRIVER'),
-      'host' => getenv('DB_HOST'),
-      'name' => getenv('DB_NAME'),
-      'user' => getenv('DB_USER'),
-      'pass' => getenv('DB_PASSWORD'),
+      'adapter' => getenv('MYSQL_DRIVER'),
+      'host' => getenv('MYSQL_HOST'),
+      'name' => getenv('MYSQL_DATABASE'),
+      'user' => getenv('MYSQL_USER'),
+      'pass' => getenv('MYSQL_PASSWORD'),
       'port' => 3306
     ]
   ]
