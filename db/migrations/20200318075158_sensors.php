@@ -37,7 +37,10 @@ class Sensors extends AbstractMigration
             ->addColumn('name', 'string')
             ->addColumn('location_id', 'integer', ['null' => true])
             ->addColumn('description', 'string')
-            ->addForeignKey('location_id', 'locations', 'id', ['delete'=> 'SET_NULL', 'update'=> 'NO_ACTION'])
+            ->addColumn('city', 'string')
+            ->addColumn('latitude', 'float')
+            ->addColumn('longitude', 'float')
+            ->addColumn('address', 'string')
             ->create();
     }
 }
