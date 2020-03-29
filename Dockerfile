@@ -10,7 +10,7 @@ COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 COPY composer.* ./
 
-COPY .env .
+COPY ./.init/Docker/.env .
 
 # instal dpendecies
 RUN composer install && docker-php-ext-install pdo pdo_mysql
