@@ -2,14 +2,14 @@
 
 require __DIR__ . '/vendor/autoload.php';
 
-use Symfony\Component\Dotenv\Dotenv;
+// use Symfony\Component\Dotenv\Dotenv;
 
-$dotenv = new Dotenv();
-$dotenv->load(__DIR__.'/.env');
+// $dotenv = new Dotenv();
+// $dotenv->load(__DIR__.'/.env');
 
-// $dotenv = Dotenv\Dotenv::createMutable(__DIR__);
-// $dotenv->load();
-$dotenv->required(['MYSQL_DRIVER', 'MYSQL_HOST', 'MYSQL_DATABASE', 'MYSQL_USER', 'MYSQL_PASSWORD']);
+// // $dotenv = Dotenv\Dotenv::createMutable(__DIR__);
+// // $dotenv->load();
+// $dotenv->required(['MYSQL_DRIVER', 'MYSQL_HOST', 'MYSQL_DATABASE', 'MYSQL_USER', 'MYSQL_PASSWORD']);
 
 return [
   'paths' => [
