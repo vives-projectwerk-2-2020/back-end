@@ -4,7 +4,7 @@ FROM php:7.3.2
 RUN apt update && apt install git -y
 
 # make directory
-WORKDIR /back-end
+WORKDIR /
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
