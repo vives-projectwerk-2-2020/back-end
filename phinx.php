@@ -17,7 +17,7 @@ return [
     'dev' => [
       'adapter' => $_ENV['MYSQL_DRIVER'],
       'host' => $_ENV['MYSQL_HOST'],
-      'name' => $_ENV[('MYSQL_DATABASE'],
+      'name' => $_ENV['MYSQL_DATABASE'],
       'user' => $_ENV['MYSQL_USER'],
       'pass' => $_ENV['MYSQL_PASSWORD'],
       'port' => 3306
