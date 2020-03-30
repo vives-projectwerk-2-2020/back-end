@@ -3128,11 +3128,8 @@
         "illuminate/database": 20,
         "php-di/php-di": 20,
         "robmorgan/phinx": 20,
-<<<<<<< HEAD
         "curl/curl": 20,
         "influxdb/influxdb-php": 20,
-=======
->>>>>>> f3e5d213d59376daa35b773e228f1abc54a68ce2
         "vlucas/phpdotenv": 20
     },
     "prefer-stable": false,
