@@ -31,8 +31,6 @@ class Users extends AbstractMigration
      */
     public function change()
     {
-
-        //create the table
         $table = $this->table('users');
         $table
             ->addColumn('UserName', 'string')

@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Sensor extends Model
 {
-    protected $fillable = ['name', 'location_id', 'description','city','latitude','longitude','address'];
+    protected $fillable = ['id', 'name', 'latitude', 'longitude', 'city', 'address', 'description'];
     public $timestamps = false;
+    public $incrementing = false;
+    protected $keyType = 'string';
 }
