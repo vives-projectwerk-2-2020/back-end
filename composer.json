@@ -8,7 +8,8 @@
         "illuminate/database": "^7.0@dev",
         "php-di/php-di": "dev-master",
         "robmorgan/phinx": "dev-master",
-        "vlucas/phpdotenv": "^4.1@dev"
+        "vlucas/phpdotenv": "^4.1@dev",
+        "symfony/dotenv": "^5.1@dev"
     },
     "license": "MIT",
     "minimum-stability": "dev",

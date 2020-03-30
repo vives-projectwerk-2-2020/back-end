@@ -2,9 +2,14 @@
 
 require __DIR__ . '/vendor/autoload.php';
 
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
-$dotenv->load();
-$dotenv->required(['MYSQL_DRIVER', 'MYSQL_HOST', 'MYSQL_DATABASE', 'MYSQL_USER', 'MYSQL_PASSWORD']);
+// use Symfony\Component\Dotenv\Dotenv;
+
+// $dotenv = new Dotenv();
+// $dotenv->load(__DIR__.'/.env');
+
+// // $dotenv = Dotenv\Dotenv::createMutable(__DIR__);
+// // $dotenv->load();
+// $dotenv->required(['MYSQL_DRIVER', 'MYSQL_HOST', 'MYSQL_DATABASE', 'MYSQL_USER', 'MYSQL_PASSWORD']);
 
 return [
   'paths' => [
@@ -15,11 +20,11 @@ return [
     'default_migration_table' => 'phinxlog',
     'default_database' => 'dev',
     'dev' => [
-      'adapter' => getenv('MYSQL_DRIVER'),
-      'host' => getenv('MYSQL_HOST'),
-      'name' => getenv('MYSQL_DATABASE'),
-      'user' => getenv('MYSQL_USER'),
-      'pass' => getenv('MYSQL_PASSWORD'),
+      'adapter' => $_ENV['MYSQL_DRIVER'],
+      'host' => $_ENV['MYSQL_HOST'],
+      'name' => $_ENV['MYSQL_DATABASE'],
+      'user' => $_ENV['MYSQL_USER'],
+      'pass' => $_ENV['MYSQL_PASSWORD'],
       'port' => 3306
     ]
   ]
