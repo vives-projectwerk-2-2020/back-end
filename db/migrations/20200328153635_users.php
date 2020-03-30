@@ -31,15 +31,11 @@ class Users extends AbstractMigration
      */
     public function change()
     {
-
-        //create the table
         $table = $this->table('users');
         $table
-            // ->addColumn('UserId', 'integer', ['primary_key'], ['null' => FALSE])
             ->addColumn('UserName', 'string')
             ->addColumn('UserPassword', 'string')
             ->addColumn('Email', 'string')
             ->create();
-
     }
 }
