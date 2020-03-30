@@ -34,13 +34,13 @@ class Sensors extends AbstractMigration
         // create the table
         $table = $this->table('sensors');
         $table
+            ->addColumn('id', 'integer', ['primary_key', 'null' => false])
             ->addColumn('name', 'string')
-            ->addColumn('location_id', 'integer', ['null' => true])
-            ->addColumn('description', 'string')
-            ->addColumn('city', 'string')
             ->addColumn('latitude', 'float')
             ->addColumn('longitude', 'float')
+            ->addColumn('city', 'string')
             ->addColumn('address', 'string')
+            ->addColumn('description', 'string')
             ->create();
     }
 }
