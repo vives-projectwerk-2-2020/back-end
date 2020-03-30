@@ -11,6 +11,6 @@ return function (App $app) {
     $app->add(function (Request $request, RequestHandler $handler) {
         $response = $handler->handle($request);
         return $response->withHeader('Content-Type', 'application/json')
-                        ->withHeader('Access-Control-Allow-Origin', '0.0.0.0:3000');
+                        ->withHeader('Access-Control-Allow-Origin', 'http://0.0.0.0:7777');
     });
 };
