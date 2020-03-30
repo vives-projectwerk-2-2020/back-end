@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "aa8e92e1d7c858e02dd9fd99169c53d7",
+    "content-hash": "244375097adbf38375478f96762fce25",
     "packages": [
         {
             "name": "cakephp/cache",
@@ -3128,8 +3128,11 @@
         "illuminate/database": 20,
         "php-di/php-di": 20,
         "robmorgan/phinx": 20,
+<<<<<<< HEAD
         "curl/curl": 20,
         "influxdb/influxdb-php": 20,
+=======
+>>>>>>> f3e5d213d59376daa35b773e228f1abc54a68ce2
         "vlucas/phpdotenv": 20
     },
     "prefer-stable": false,

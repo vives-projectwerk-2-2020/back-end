@@ -1,4 +1,6 @@
-# back-end
+# back-end 
+
+![Docker Image CI](https://github.com/vives-projectwerk-2-2020/back-end/workflows/Docker%20Image%20CI/badge.svg?branch=develop)
 
 ## install
 
@@ -6,8 +8,9 @@ composer install
 
 ## to start-up
 
-php -S localhost:3000
+php -S localhost:3000  
+vendor/bin/phinx migrate
 
-## routes
+## create new table
 
-https://app.swaggerhub.com/apis-docs/sillevl/Particula/0.1#/default
+vendor/bin/phinx create MyNewMigration
