@@ -44,3 +44,11 @@ Dit kan ook weergegeven worden dankzij insomnia:
 ![](images/insomnia.PNG)
 
 Extra informatie in verband met de structuur van deze toepassing is te vinden op `https://app.swaggerhub.com/apis-docs/sillevl/Particula/0.1#/`
+
+## Development
+
+Check if the code complies to the PSR2 recommendations with the following command:
+
+```bash
+composer lint
+```
