@@ -36,6 +36,7 @@ class Users extends AbstractMigration
             ->addColumn('UserName', 'string')
             ->addColumn('UserPassword', 'string')
             ->addColumn('Email', 'string')
+            ->addIndex(['UserName', 'Email'], ['unique' => true])
             ->create();
     }
 }
