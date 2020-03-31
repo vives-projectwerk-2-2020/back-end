@@ -30,7 +30,10 @@ return function (App $app) {
 
             $jsontext .= $sensor_json . ",";
         }
-        $jsontext = substr_replace($jsontext, '', -1);
+
+        if (!empty($sensors)) {
+            $jsontext = substr_replace($jsontext, '', -1);
+        }
         $jsontext .= "]";
 
         $response->getBody()->write($jsontext);
