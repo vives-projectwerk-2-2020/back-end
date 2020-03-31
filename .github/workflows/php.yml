@@ -1,5 +1,4 @@
-name: PHP Composer
-
+name: PHPCS PSR2 Linter
 on:
   push:
     branches: [ master, develop ]
