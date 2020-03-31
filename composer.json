@@ -7,7 +7,9 @@
         "slim/psr7": "dev-master",
         "illuminate/database": "^7.0@dev",
         "php-di/php-di": "dev-master",
-        "robmorgan/phinx": "dev-master"
+        "robmorgan/phinx": "dev-master",
+        "vlucas/phpdotenv": "^4.1@dev",
+        "squizlabs/php_codesniffer": "*"
     },
     "license": "MIT",
     "minimum-stability": "dev",
@@ -15,5 +17,8 @@
         "prs-4": {
             "App\\": "src/"
         }
+    },
+    "scripts": {
+        "lint": "phpcs"
     }
 }

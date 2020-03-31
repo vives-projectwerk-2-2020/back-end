@@ -19,5 +19,7 @@ COPY . .
 # open poort
 EXPOSE 3000
 
+ENV APP_URL=
+
 # start server
-CMD php -S 0.0.0.0:3000
+CMD php -S ${APP_URL}
