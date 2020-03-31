@@ -13,16 +13,27 @@ return function (App $app) {
         $response->getBody()->write("Hello world!");
         return $response;
     });
+
     $app->post('/addsensor', function (Request $request, Response $response) {
         $data = $request->getParsedBody();
         $sensor = Sensor::create($data);
         $sensor->save();
         return $response;
     });
+
     $app->get('/sensors', function (Request $request, Response $response) {
-        $sensor = Sensor::all();
-        $jsonSensor = json_encode($sensor);
-        $response->getBody()->write($jsonSensor);
+        $sensors = Sensor::all();
+        $jsontext = "[";
+        foreach ($sensors as $sensor) {
+            $location = array("latitude"=>$sensor->latitude,"longitude"=>$sensor->longitude,"city"=>$sensor->city, "address"=>$sensor->address);
+            $sensor_json = json_encode(array("id"=>$sensor->id, "name"=>$sensor->name, "location"=>$location, "description"=>$sensor->description));
+
+            $jsontext .= $sensor_json . ",";
+        }
+        $jsontext = substr_replace($jsontext, '', -1);
+        $jsontext .= "]";
+
+        $response->getBody()->write($jsontext);
         return $response;
     });
 };
