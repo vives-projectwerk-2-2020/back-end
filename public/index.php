@@ -7,17 +7,17 @@ use DI\ContainerBuilder;
 use Illuminate\Database\Capsule\Manager as Capsule;
 use Psr\Container\ContainerInterface;
 
-require __DIR__ . '/vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 // Instantiate PHP-DI ContainerBuilder
 $containerBuilder = new ContainerBuilder();
 
 // Set up settings
-$settings = require __DIR__ . '/src/settings.php';
+$settings = require __DIR__ . '/../src/settings.php';
 $settings($containerBuilder);
 
 // Set up dependencies
-$dependencies = require __DIR__ . '/src/dependencies.php';
+$dependencies = require __DIR__ . '/../src/dependencies.php';
 $dependencies($containerBuilder);
 
 // Build PHP-DI Container instance
@@ -33,11 +33,11 @@ $app->addBodyParsingMiddleware();
 $app->addErrorMiddleware(true, true, true);
 
 // Register middleware
-$middleware = require __DIR__ . '/src/middleware.php';
+$middleware = require __DIR__ . '/../src/middleware.php';
 $middleware($app);
 
 // Register routes
-$routes = require __DIR__ . '/src/routes.php';
+$routes = require __DIR__ . '/../src/routes.php';
 $routes($app);
 
 $app->getContainer()->get('Illuminate\Database\Capsule\Manager');
