@@ -4,7 +4,7 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
 use App\Models\Sensor;
-use App\Models\Location;
+use App\Models\User;
 
 use Slim\App;
 
@@ -47,8 +47,23 @@ return function (App $app) {
         return $response;
     });
 
-    $app->get('/user/{email}', function (Request $request, Response $response, $args) {
-        $response->getBody()->write("Hello world!");
+    $app->get('/user/{username}', function (Request $request, Response $response, $args) {
+        $users = User::where('UserName', $args["username"])
+               ->get();
+
+        $jsontext = "[";
+        foreach ($users as $user) {
+            $user_json = json_encode(array("username"=>$user->UserName, "password"=>$user->UserPassword, "email"=>$user->Email));
+
+            $jsontext .= $user_json . ",";
+        }
+
+        if (mysqli_num_rows($users) > 0) {
+            $jsontext = substr_replace($jsontext, '', -1);
+        }
+        $jsontext .= "]";
+
+        $response->getBody()->write($jsontext);
         return $response;
     });
 };
