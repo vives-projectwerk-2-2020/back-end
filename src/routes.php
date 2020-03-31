@@ -31,7 +31,7 @@ return function (App $app) {
             $jsontext .= $sensor_json . ",";
         }
 
-        if (!empty($sensors)) {
+        if (mysqli_num_rows($sensors) > 0) {
             $jsontext = substr_replace($jsontext, '', -1);
         }
         $jsontext .= "]";
