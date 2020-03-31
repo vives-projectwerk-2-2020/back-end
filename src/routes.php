@@ -36,4 +36,16 @@ return function (App $app) {
         $response->getBody()->write($jsontext);
         return $response;
     });
+
+    $app->post('/adduser', function (Request $request, Response $response) {
+        $data = $request->getParsedBody();
+        $sensor = User::create($data);
+        $sensor->save();
+        return $response;
+    });
+
+    $app->get('/user/{email}', function (Request $request, Response $response, $args) {
+        $response->getBody()->write("Hello world!");
+        return $response;
+    });
 };
