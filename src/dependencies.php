@@ -7,6 +7,7 @@ use Illuminate\Database\Capsule\Manager as Capsule;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use Psr\Log\LoggerInterface;
+use InfluxDB\Client;
 
 return function (ContainerBuilder $containerBuilder) {
     $containerBuilder->addDefinitions([
@@ -34,5 +35,19 @@ return function (ContainerBuilder $containerBuilder) {
  
         return $logger;
       },
+      'influxDB' => function (ContainerInterface $c) {
+        $settings = $c->get('settings')['influxDB'];
+        
+        // $logger = $c->get(LoggerInterface::class);
+        // $logger->info(
+        //     "Connecting to Influxdb",
+        //     [ 'dbName' => $dbName, 'host' => $host, 'port' => $port ]
+        // );
+        $host = $settings['host'];
+        $port = $settings['port'];
+
+        $client = new Client($host, $port);
+        return $client->selectDB($settings['database']);
+      }
     ]);
 };

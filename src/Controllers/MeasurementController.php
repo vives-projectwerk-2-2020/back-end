@@ -6,25 +6,14 @@ use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
-use InfluxDB\Client;
-
 class MeasurementController extends AppController
 {
-    private $dbName = 'particulaInfluxDB';    // should be configurable using env
-    private $client;
     private $database;
 
     public function __construct(ContainerInterface $container)
     {
         parent::__construct($container);
-        $dbName = $this->dbName;
-        $host = getenv('INFLUX_IP');
-        $port = getenv('INFLUX_PORT');
-        $this->logger->info(
-            "Connecting to Influxdb",
-            [ 'dbName' => $dbName, 'host' => $host, 'port' => $port ]
-        );
-        $this->connect($this->dbName, $host, $port);
+        $this->database = $container->get('influxDB');
     }
 
     public function getAllMeasurements(Request $request, Response $response, $args)
@@ -62,11 +51,5 @@ class MeasurementController extends AppController
         }
         $response->getBody()->write(json_encode($decoded));
         return $response;
-    }
-
-    private function connect($dbName, $host = 'localhost', $port = '8086')
-    {
-        $this->client = new Client($host, $port);
-        $this->database = $this->client->selectDB($dbName);
     }
 }
