@@ -2,9 +2,9 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ IMAGE_BRANCH ]
+    branches: [ $IMAGE_BRANCH ]
   pull_request:
-    branches: [ IMAGE_BRANCH ]
+    branches: [ $IMAGE_BRANCH ]
 env:
   IMAGE_NAME: particula-back-end
   IMAGE_BRANCH: $(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
@@ -21,7 +21,7 @@ jobs:
         username: "${{ github.actor }}"
         password: "${{ secrets.GITHUB_TOKEN }}"
         image_name: vives-projectwerk-2-2020/back-end/particula-back-end
-        image_tag: IMAGE_BRANCH
+        image_tag: $IMAGE_BRANCH
         registry: docker.pkg.github.com
         
   deploy:
