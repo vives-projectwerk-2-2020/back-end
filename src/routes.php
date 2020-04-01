@@ -12,7 +12,7 @@ use Slim\App;
 
 return function (App $app) {
     // Home routes
-    $app->get('/', HomeController::class . ':index' );
+    $app->get('/', HomeController::class . ':index');
 
     // Testing routes?
     $app->get('/foo', MeasurementController::class . ':getAllMeasurements');
@@ -22,10 +22,10 @@ return function (App $app) {
 
     // Sensor routes
     $app->post('/addsensor', SensorController::class . ':create');
-    $app->get('/sensors',  SensorController::class . ':index');
+    $app->get('/sensors', SensorController::class . ':index');
 
     // User routes
-    $app->get('/users',UserController::class . ':index');
-    $app->post('/users',UserController::class . ':create');
+    $app->get('/users', UserController::class . ':index');
+    $app->post('/users', UserController::class . ':create');
     $app->get('/users/{username}', UserController::class . ':details');
 };
