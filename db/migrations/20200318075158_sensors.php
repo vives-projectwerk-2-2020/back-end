@@ -1,6 +1,6 @@
 <?php
 
-namespace db\migrations;
+namespace App\Models;
 
 use Phinx\Migration\AbstractMigration;
 
