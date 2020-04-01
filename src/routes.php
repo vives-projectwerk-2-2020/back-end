@@ -31,7 +31,7 @@ return function (App $app) {
         $time = date('y-m-d\TH:i:s');
         $response->getBody()->write(json_encode($time));
         $test =  substr("qwerty", 0, 2);
-        echo $test;
+        $logger->debug($test);
 
 
         return $response;
