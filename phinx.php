@@ -8,8 +8,8 @@ $dotenv->required(['MYSQL_DRIVER', 'MYSQL_HOST', 'MYSQL_DATABASE', 'MYSQL_USER',
 
 return [
   'paths' => [
-    'migrations' => 'db/migrations',
-    'seeds' => 'db/seeds'
+    'migrations' => '/db/migrations',
+    'seeds' => '/db/seeds'
   ],
   'environments' => [
     'default_migration_table' => 'phinxlog',
