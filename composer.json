@@ -14,11 +14,12 @@
     "license": "MIT",
     "minimum-stability": "dev",
     "autoload": {
-        "prs-4": {
+        "psr-4": {
             "App\\": "src/"
         }
     },
     "scripts": {
-        "lint": "phpcs"
+        "lint": "phpcs",
+        "migrate": "phinx migrate"
     }
 }

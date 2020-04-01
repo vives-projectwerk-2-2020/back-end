@@ -11,7 +11,7 @@ COPY --from=composer /usr/bin/composer /usr/bin/composer
 COPY composer.* ./
 
 # instal dpendecies
-RUN composer install
+RUN composer install && docker-php-ext-install pdo pdo_mysql
 
 # copy in directory
 COPY . .
@@ -19,7 +19,5 @@ COPY . .
 # open poort
 EXPOSE 3000
 
-ENV APP_URL=
-
 # start server
-CMD php -S ${APP_URL}
+CMD vendor/bin/phinx migrate && php -S 0.0.0.0:3000 -t public

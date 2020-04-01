@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "7a78e0d0c8e92e6ef20254e074300808",
+    "content-hash": "51108f2c83ba50842e07471e809f705d",
     "packages": [
         {
             "name": "cakephp/cache",
@@ -795,16 +795,16 @@
         },
         {
             "name": "illuminate/database",
-            "version": "dev-master",
+            "version": "7.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/database.git",
-                "reference": "34d25b0ef827d56952d609174edeee2b0ca01694"
+                "reference": "a3d3978106f2d4dc4f9b1906f6aba96c48bd96c7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/database/zipball/34d25b0ef827d56952d609174edeee2b0ca01694",
-                "reference": "34d25b0ef827d56952d609174edeee2b0ca01694",
+                "url": "https://api.github.com/repos/illuminate/database/zipball/a3d3978106f2d4dc4f9b1906f6aba96c48bd96c7",
+                "reference": "a3d3978106f2d4dc4f9b1906f6aba96c48bd96c7",
                 "shasum": ""
             },
             "require": {
@@ -852,7 +852,7 @@
                 "orm",
                 "sql"
             ],
-            "time": "2020-02-11T15:07:33+00:00"
+            "time": "2020-03-10T12:57:36+00:00"
         },
         {
             "name": "illuminate/support",
@@ -1952,12 +1952,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/slimphp/Slim.git",
-                "reference": "2058eea946d8569323104d188814c0ba2b1d1d2d"
+                "reference": "430ac45997ce1fbd7ee20a354d26351f3fa985ae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/slimphp/Slim/zipball/2058eea946d8569323104d188814c0ba2b1d1d2d",
-                "reference": "2058eea946d8569323104d188814c0ba2b1d1d2d",
+                "url": "https://api.github.com/repos/slimphp/Slim/zipball/430ac45997ce1fbd7ee20a354d26351f3fa985ae",
+                "reference": "430ac45997ce1fbd7ee20a354d26351f3fa985ae",
                 "shasum": ""
             },
             "require": {
@@ -1981,8 +1981,8 @@
                 "phpspec/prophecy": "^1.10",
                 "phpstan/phpstan": "^0.11.5",
                 "phpunit/phpunit": "^8.5",
-                "slim/http": "^0.7",
-                "slim/psr7": "^0.3",
+                "slim/http": "^1.0",
+                "slim/psr7": "^1.0",
                 "squizlabs/php_codesniffer": "^3.5"
             },
             "suggest": {
@@ -2036,7 +2036,7 @@
                 "micro",
                 "router"
             ],
-            "time": "2020-01-30T17:34:00+00:00"
+            "time": "2020-02-18T21:56:03+00:00"
         },
         {
             "name": "squizlabs/php_codesniffer",
@@ -2277,6 +2277,64 @@
             "description": "A generic function and convention to trigger deprecation notices",
             "homepage": "https://symfony.com",
             "time": "2020-02-10T10:54:33+00:00"
+        },
+        {
+            "name": "symfony/dotenv",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/dotenv.git",
+                "reference": "0628b006281b230b3d0c635c3751720430a46ec1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/dotenv/zipball/0628b006281b230b3d0c635c3751720430a46ec1",
+                "reference": "0628b006281b230b3d0c635c3751720430a46ec1",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2.5",
+                "symfony/deprecation-contracts": "^2.1"
+            },
+            "require-dev": {
+                "symfony/process": "^4.4|^5.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "5.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Dotenv\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Registers environment variables from a .env file",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "dotenv",
+                "env",
+                "environment"
+            ],
+            "time": "2020-02-29T10:07:16+00:00"
         },
         {
             "name": "symfony/filesystem",
@@ -3179,7 +3237,8 @@
         "illuminate/database": 20,
         "php-di/php-di": 20,
         "robmorgan/phinx": 20,
-        "vlucas/phpdotenv": 20
+        "vlucas/phpdotenv": 20,
+        "symfony/dotenv": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

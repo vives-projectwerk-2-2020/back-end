@@ -2,7 +2,7 @@
 
 use Phinx\Migration\AbstractMigration;
 
-class Sensor extends AbstractMigration
+class Users extends AbstractMigration
 {
     /**
      * Change Method.
@@ -31,13 +31,12 @@ class Sensor extends AbstractMigration
      */
     public function change()
     {
-        // create the table
-        $table = $this->table('sensor');
-        $table->addColumn('name', 'string')
-            ->addColumn('latitude', 'float')
-            ->addColumn('longitude', 'float')
-            // ->addForeignKey('user_id', 'int')
-            ->addColumn('created', 'datetime')
+        $table = $this->table('users');
+        $table
+            ->addColumn('UserName', 'string')
+            ->addColumn('UserPassword', 'string')
+            ->addColumn('Email', 'string')
+            ->addIndex(['UserName'], ['unique' => true])
             ->create();
     }
 }
