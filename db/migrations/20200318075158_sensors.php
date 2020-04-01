@@ -1,5 +1,7 @@
 <?php
 
+namespace db\migrations;
+
 use Phinx\Migration\AbstractMigration;
 
 class Sensors extends AbstractMigration
