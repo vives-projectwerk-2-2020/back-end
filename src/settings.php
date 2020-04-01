@@ -3,9 +3,13 @@ declare(strict_types=1);
 
 use Monolog\Logger;
 
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/..');
-$dotenv->load();
-$dotenv->required(['MYSQL_DRIVER', 'MYSQL_HOST', 'MYSQL_DATABASE', 'MYSQL_USER', 'MYSQL_PASSWORD']);
+try {
+    $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/..');
+    $dotenv->load();
+    $dotenv->required(['MYSQL_DRIVER', 'MYSQL_HOST', 'MYSQL_DATABASE', 'MYSQL_USER', 'MYSQL_PASSWORD']);
+} finally {
+    echo "no .env file in this container"; 
+}
 
 use DI\ContainerBuilder;
 
