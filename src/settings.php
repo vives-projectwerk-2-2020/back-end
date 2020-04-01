@@ -1,6 +1,8 @@
 <?php
 declare(strict_types=1);
 
+use Monolog\Logger;
+
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/..');
 $dotenv->load();
 $dotenv->required(['MYSQL_DRIVER', 'MYSQL_HOST', 'MYSQL_DATABASE', 'MYSQL_USER', 'MYSQL_PASSWORD']);
@@ -18,7 +20,13 @@ return function (ContainerBuilder $containerBuilder) {
                 'database' => getenv('MYSQL_DATABASE'),
                 'username' => getenv('MYSQL_USER'),
                 'password' => getenv('MYSQL_PASSWORD'),
-              ]
+            ],
+            'logger' => [
+                'name' => 'Particula',
+                'path' => 'php://stderr',
+                'level' => Logger::DEBUG,
+                'logfile' => __DIR__.'/../logs/server.log',
+            ],
         ],
     ]);
 };
