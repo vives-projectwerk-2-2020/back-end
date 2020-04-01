@@ -7,7 +7,7 @@ try {
   $dotenv->load();
   $dotenv->required(['MYSQL_DRIVER', 'MYSQL_HOST', 'MYSQL_DATABASE', 'MYSQL_USER', 'MYSQL_PASSWORD']);
 } catch (Exception $e) {
-  echo "no .env file in this container"; 
+  //echo "no .env file in this container"; 
 }
 
 return [
