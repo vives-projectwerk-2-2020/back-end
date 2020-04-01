@@ -19,6 +19,17 @@ return function (ContainerBuilder $containerBuilder) {
           $eloquent->setFetchMode(PDO::FETCH_ASSOC);
 
           return $eloquent;
-      }
+      },
+      LoggerInterface::class => function (ContainerInterface $c) {
+        $settings = $c->get('settings')['logger'];
+ 
+        $logger = new Logger($settings['name']);
+        $consoleHandler = new StreamHandler($settings['path'], $settings['level']);
+        // $fileHandler = new StreamHandler($settings['logfile'], $settings['level']);
+        // $logger->pushHandler($fileHandler);
+        $logger->pushHandler($consoleHandler);
+ 
+        return $logger;
+      },
     ]);
 };
