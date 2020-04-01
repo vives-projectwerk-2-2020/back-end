@@ -5,9 +5,9 @@ env:
   IMAGE_BRANCH: $(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
 on:
   push:
-    branches: [ develop, master ]
+    branches: [ IMAGE_BRANCH ]
   pull_request:
-    branches: [ develop, master ]
+    branches: [ IMAGE_BRANCH ]
 jobs:
 
   build:
