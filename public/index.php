@@ -41,6 +41,7 @@ $routes = require __DIR__ . '/../src/routes.php';
 $routes($app);
 
 $app->getContainer()->get('Illuminate\Database\Capsule\Manager');
+$app->getContainer()->get('influxDB');
 
 // Run app
 $app->run();

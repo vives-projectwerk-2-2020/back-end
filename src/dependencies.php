@@ -9,6 +9,8 @@ use Monolog\Logger;
 use Psr\Log\LoggerInterface;
 use InfluxDB\Client;
 
+use App\Models\Measurement;
+
 return function (ContainerBuilder $containerBuilder) {
     $containerBuilder->addDefinitions([
       Capsule::class => function (ContainerInterface $c) {
@@ -38,16 +40,13 @@ return function (ContainerBuilder $containerBuilder) {
       'influxDB' => function (ContainerInterface $c) {
         $settings = $c->get('settings')['influxDB'];
         
-        // $logger = $c->get(LoggerInterface::class);
-        // $logger->info(
-        //     "Connecting to Influxdb",
-        //     [ 'dbName' => $dbName, 'host' => $host, 'port' => $port ]
-        // );
         $host = $settings['host'];
         $port = $settings['port'];
 
         $client = new Client($host, $port);
-        return $client->selectDB($settings['database']);
-      }
+        $database = $client->selectDB($settings['database']);
+        Measurement::setDatabase($database);
+        return $database;
+      },
     ]);
 };
