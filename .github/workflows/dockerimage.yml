@@ -21,7 +21,7 @@ jobs:
         username: "${{ github.actor }}"
         password: "${{ secrets.GITHUB_TOKEN }}"
         image_name: vives-projectwerk-2-2020/back-end/particula-back-end
-        image_tag: $IMAGE_BRANCH
+        image_tag: IMAGE_BRANCH
         registry: docker.pkg.github.com
         
   deploy:
