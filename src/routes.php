@@ -25,6 +25,8 @@ return function (App $app) {
         $logger->notice('Your notice log message');
         $logger->info('Your info log message');
         $logger->debug('Your debug log message');
+        $logger->debug('example with extra objects/info', array('username' => 'admin'));
+
 
         $time = date('y-m-d\TH:i:s');
         $response->getBody()->write(json_encode($time));

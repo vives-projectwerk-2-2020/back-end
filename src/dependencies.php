@@ -29,7 +29,7 @@ return function (ContainerBuilder $containerBuilder) {
         $logger = new Logger($settings['name']);
         $consoleHandler = new StreamHandler($settings['path'], $settings['level']);
         // $fileHandler = new StreamHandler($settings['logfile'], $settings['level']);
-        $logger->pushHandler($fileHandler);
+        // $logger->pushHandler($fileHandler);
         $logger->pushHandler($consoleHandler);
  
         return $logger;
