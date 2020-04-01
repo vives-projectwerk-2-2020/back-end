@@ -1,13 +1,13 @@
 name: Docker Image CI
 
-on:
-  push:
-    branches: [ IMAGE_BRANCH ]
-  pull_request:
-    branches: [ IMAGE_BRANCH ]
 env:
   IMAGE_NAME: particula-back-end
   IMAGE_BRANCH: $(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
+on:
+  push:
+    branches: [ develop, master ]
+  pull_request:
+    branches: [ develop, master ]
 jobs:
 
   build:
