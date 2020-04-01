@@ -12,8 +12,11 @@ try {
 
 return [
   'paths' => [
-    'migrations' => '/db/migrations',
-    'seeds' => '/db/seeds'
+    'migrations' => [
+      'Sensors' => 'db/migrations/sensors',
+      'Users' => 'db/migrations/users',
+    ],
+    'seeds' => 'db/seeds'
   ],
   'environments' => [
     'default_migration_table' => 'phinxlog',

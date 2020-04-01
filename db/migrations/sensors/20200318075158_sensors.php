@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Models;
+namespace Sensors;
 
 use Phinx\Migration\AbstractMigration;
 
-class Users extends AbstractMigration
+class Sensors extends AbstractMigration
 {
     /**
      * Change Method.
@@ -33,12 +33,16 @@ class Users extends AbstractMigration
      */
     public function change()
     {
-        $table = $this->table('users');
+        // create the table
+        $table = $this->table('sensors', ['id' => false, 'primary_key' => 'id']);
         $table
-            ->addColumn('UserName', 'string')
-            ->addColumn('UserPassword', 'string')
-            ->addColumn('Email', 'string')
-            ->addIndex(['UserName'], ['unique' => true])
+            ->addColumn('id', 'string')
+            ->addColumn('name', 'string')
+            ->addColumn('latitude', 'float')
+            ->addColumn('longitude', 'float')
+            ->addColumn('city', 'string')
+            ->addColumn('address', 'string')
+            ->addColumn('description', 'string')
             ->create();
     }
 }
