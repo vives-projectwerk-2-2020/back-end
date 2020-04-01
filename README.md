@@ -66,8 +66,26 @@ Extra informatie in verband met de structuur van deze toepassing is te vinden op
 
 ## Development
 
+### Linter
+
 Check if the code complies to the PSR2 recommendations with the following command:
 
 ```bash
 composer lint
+```
+
+### Linter autofix
+
+Some Linter errors and warnings can be fixed automatically. Use the following composer command:
+
+```bash
+composer lint-fix
+```
+
+### Migrations
+
+To run a database migration use the command:
+
+```bash
+composer migrate
 ```
