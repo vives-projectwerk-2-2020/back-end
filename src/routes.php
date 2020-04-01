@@ -63,7 +63,8 @@ return function (App $app) {
         //untested
         $new_date = $period_time . $period_range;
         //echo "select pm10,pm25,temperature,humidity FROM sensors WHERE sensor_id = $id AND time > now() - $new_date";
-        $result = $database->query("select $properties FROM sensors WHERE sensor_id =~ /$id/ AND time > now() - $new_date");
+        $sql_select_query = "select $properties FROM sensors WHERE sensor_id =~ /$id/ AND time > now() - $new_date";
+        $result = $database->query($sql_select_query);
         //remove time from response
         $decoded = $result->getPoints();
         for ($i = 0; $i < count($decoded); $i++) {
@@ -84,8 +85,10 @@ return function (App $app) {
         $sensors = Sensor::all();
         $jsontext = "[";
         foreach ($sensors as $sensor) {
-            $location = array("latitude"=>$sensor->latitude,"longitude"=>$sensor->longitude,"city"=>$sensor->city, "address"=>$sensor->address);
-            $sensor_json = json_encode(array("id"=>$sensor->id, "name"=>$sensor->name, "location"=>$location, "description"=>$sensor->description));
+            $location = array("latitude"=>$sensor->latitude,"longitude"=>$sensor->longitude,
+                "city"=>$sensor->city, "address"=>$sensor->address);
+            $sensor_json = json_encode(array("id"=>$sensor->id, "name"=>$sensor->name,
+                "location"=>$location, "description"=>$sensor->description));
 
             $jsontext .= $sensor_json . ",";
         }
@@ -112,7 +115,8 @@ return function (App $app) {
 
         $jsontext = "[";
         foreach ($users as $user) {
-            $user_json = json_encode(array("username"=>$user->UserName, "password"=>$user->UserPassword, "email"=>$user->Email));
+            $user_json = json_encode(array("username"=>$user->UserName,
+                "password"=>$user->UserPassword, "email"=>$user->Email));
 
             $jsontext .= $user_json . ",";
         }
