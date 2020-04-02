@@ -7,19 +7,14 @@ on:
     branches: [ develop, master ]
 env:
   IMAGE_NAME: particula-back-end
-  BRANCH_NAME: develop 
+  BRANCH_NAME: $(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,') 
 jobs:
 
   build:
 
     runs-on: ubuntu-latest
 
-    steps:
-    - name: Set branche name as image tag
-      run: |
-        # Strip git ref prefix from version
-        BRANCH_NAME=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
-        
+    steps:        
     - uses: actions/checkout@v2
     - uses: whoan/docker-build-with-cache-action@master
       with:
