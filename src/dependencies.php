@@ -7,6 +7,9 @@ use Illuminate\Database\Capsule\Manager as Capsule;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use Psr\Log\LoggerInterface;
+use InfluxDB\Client;
+
+use App\Models\Measurement;
 
 return function (ContainerBuilder $containerBuilder) {
     $containerBuilder->addDefinitions([
@@ -33,6 +36,17 @@ return function (ContainerBuilder $containerBuilder) {
         $logger->pushHandler($consoleHandler);
  
         return $logger;
+      },
+      'influxDB' => function (ContainerInterface $c) {
+        $settings = $c->get('settings')['influxDB'];
+        
+        $host = $settings['host'];
+        $port = $settings['port'];
+
+        $client = new Client($host, $port);
+        $database = $client->selectDB($settings['database']);
+        Measurement::setDatabase($database);
+        return $database;
       },
     ]);
 };

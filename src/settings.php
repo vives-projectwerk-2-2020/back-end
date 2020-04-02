@@ -31,6 +31,11 @@ return function (ContainerBuilder $containerBuilder) {
                 'level' => Logger::DEBUG,
                 'logfile' => __DIR__.'/../logs/server.log',
             ],
+            'influxDB' => [
+                'host' => getenv('INFLUX_IP'),
+                'port' => getenv('INFLUX_PORT'),
+                'database' => 'particulaInfluxDB',      // needs to be an env var as well !!!
+            ]
         ],
     ]);
 };
