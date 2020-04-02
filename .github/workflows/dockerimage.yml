@@ -7,7 +7,7 @@ on:
     branches: [ develop, master ]
 env:
   IMAGE_NAME: particula-back-end
-  BRANCH_NAME: $(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,') 
+  BRANCH_NAME: $(echo '${{ github.ref }}' | sed -e 's,.*/\(.*\),\1,') 
 jobs:
 
   build:
