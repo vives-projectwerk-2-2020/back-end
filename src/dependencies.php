@@ -23,7 +23,7 @@ return function (ContainerBuilder $containerBuilder) {
 
           return $eloquent;
       },
-      'logger' => function (ContainerInterface $c) {
+      LoggerInterface::class => function (ContainerInterface $c) {
         $settings = $c->get('settings')['logger'];
  
         $logger = new Logger($settings['name']);
