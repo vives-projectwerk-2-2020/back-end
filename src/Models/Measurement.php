@@ -36,7 +36,8 @@ class Measurement
         //untested
         $new_date = $period_time . $period_range;
         //echo "select pm10,pm25,temperature,humidity FROM sensors WHERE sensor_id = $id AND time > now() - $new_date";
-        $result = $database->query("select $properties FROM sensors WHERE sensor_id =~ /$id/ AND time > now() - $new_date");
+        $query = "select $properties FROM sensors WHERE sensor_id =~ /$id/ AND time > now() - $new_date";
+        $result = $database->query($query);
         //remove time from response
         $decoded = $result->getPoints();
         for ($i = 0; $i < count($decoded); $i++) {

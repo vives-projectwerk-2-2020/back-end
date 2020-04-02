@@ -20,8 +20,10 @@ class SensorController extends AppController
         $sensors = Sensor::all();
         $jsontext = "[";
         foreach ($sensors as $sensor) {
-            $location = array("latitude"=>$sensor->latitude,"longitude"=>$sensor->longitude,"city"=>$sensor->city, "address"=>$sensor->address);
-            $sensor_json = json_encode(array("id"=>$sensor->id, "name"=>$sensor->name, "location"=>$location, "description"=>$sensor->description));
+            $location = array("latitude"=>$sensor->latitude,"longitude"=>$sensor->longitude
+                , "city"=>$sensor->city, "address"=>$sensor->address);
+            $sensor_json = json_encode(array("id"=>$sensor->id, "name"=>$sensor->name
+                , "location"=>$location, "description"=>$sensor->description));
 
             $jsontext .= $sensor_json . ",";
         }

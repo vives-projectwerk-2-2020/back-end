@@ -36,7 +36,8 @@ class UserController extends AppController
             ->get();
         $jsontext = "[";
         foreach ($users as $user) {
-            $user_json = json_encode(array("username"=>$user->UserName, "password"=>$user->UserPassword, "email"=>$user->Email));
+            $user_json = json_encode(array("username"=>$user->UserName
+                , "password"=>$user->UserPassword, "email"=>$user->Email));
             $jsontext .= $user_json . ",";
         }
         if ($users->count() > 0) {
