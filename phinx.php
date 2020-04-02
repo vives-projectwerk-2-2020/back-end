@@ -2,13 +2,20 @@
 
 require __DIR__ . '/vendor/autoload.php';
 
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
-$dotenv->load();
-$dotenv->required(['MYSQL_DRIVER', 'MYSQL_HOST', 'MYSQL_DATABASE', 'MYSQL_USER', 'MYSQL_PASSWORD']);
+try {
+  $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+  $dotenv->load();
+  $dotenv->required(['MYSQL_DRIVER', 'MYSQL_HOST', 'MYSQL_DATABASE', 'MYSQL_USER', 'MYSQL_PASSWORD']);
+} catch (Exception $e) {
+  //echo "no .env file in this container"; 
+}
 
 return [
   'paths' => [
-    'migrations' => 'db/migrations',
+    'migrations' => [
+      'Sensors' => 'db/migrations/sensors',
+      'Users' => 'db/migrations/users',
+    ],
     'seeds' => 'db/seeds'
   ],
   'environments' => [

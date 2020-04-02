@@ -41,19 +41,19 @@ Eerst roepen we de server aan op de poort van de backend, hier vermelden we bij
 dat we de meetingen willen opvragen:
 
 ```
-http://134.209.207.119:8080/measurements
+http://develop.particula.devbitapp.be:8080/measurements
 ```
 
 door hierbij het id toe te voegen krijg je een specifieke sensor:
 
 ```
-http://134.209.207.119:8080/measurements/nico-prototype-l432
+http://develop.particula.devbitapp.be:8080/measurements/nico-prototype-l432
 ```
 
 Om data te kunnen weergeven moet je een periode en een propertie toevoegen:
 
 ```
-http://134.209.207.119:8080/measurements/nico-prototype-l432?period=1d&properties=pm25
+http://develop.particula.devbitapp.be:8080/measurements/nico-prototype-l432?period=1d&properties=pm25
 ```
 
 in dit geval voegen we de pm2.5 waarde van de sensor van nico dit van de afgelopen 24h.
