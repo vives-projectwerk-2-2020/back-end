@@ -7,6 +7,7 @@ on:
     branches: [ develop, master ]
 env:
   IMAGE_NAME: particula-back-end
+  BRANCH_NAME: notset
 jobs:
 
   build:
