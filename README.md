@@ -64,6 +64,56 @@ Dit kan ook weergegeven worden dankzij insomnia:
 
 Extra informatie in verband met de structuur van deze toepassing is te vinden op `https://app.swaggerhub.com/apis-docs/sillevl/Particula/0.1#/`
 
+## routes for MariaDB
+
+`Sensors` and `Users` are stored in a MariaDB database and can be accessed using the GET and POST requests found beneath. 
+
+### Sensors
+
+All sensors with their information can be obtained with following get request:
+
+```
+GET http://<ip>:8080/sensors
+```
+
+The format of the result is specified at `https://app.swaggerhub.com/apis-docs/sillevl/Particula/0.1#/`, for example:
+
+![GET request sensors](images/sensors.png)
+
+A sensor can be added to the database sending following post request:
+
+```
+POST http://<ip>:8080/addsensor
+```
+
+A sensor can only be created if all information is entered:
+
+![addsensor](images/addsensor.png)
+
+### Users
+
+A list of users can be found using a get request:
+
+```
+GET http://<ip>:8080/users
+```
+
+The information of once user can be found by adding the username to the previous request:
+
+```
+GET http://<ip>:8080/users/{username}
+```
+
+At last a user can be added keeping in mind that a username needs to be unique:
+
+```
+POST http://<ip>:8080/adduser
+```
+
+A user exists off the following information:
+
+![adduser](images/adduser.png)
+
 ## Development
 
 ### Linter
