@@ -64,7 +64,7 @@ Dit kan ook weergegeven worden dankzij insomnia:
 
 Extra informatie in verband met de structuur van deze toepassing is te vinden op `https://app.swaggerhub.com/apis-docs/sillevl/Particula/0.1#/`
 
-## routes for MariaDB
+## Routes for MariaDB
 
 `Sensors` and `Users` are stored in a MariaDB database and can be accessed using the GET and POST requests found beneath. 
 
