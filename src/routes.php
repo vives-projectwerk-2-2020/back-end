@@ -26,6 +26,6 @@ return function (App $app) {
 
     // User routes
     $app->get('/users', UserController::class . ':index');
-    $app->post('/users', UserController::class . ':create');
+    $app->post('/adduser', UserController::class . ':create');
     $app->get('/users/{username}', UserController::class . ':details');
 };
