@@ -76,7 +76,7 @@ All sensors with their information can be obtained with following get request:
 GET http://<ip>:8080/sensors
 ```
 
-The format of the result is specified at `https://app.swaggerhub.com/apis-docs/sillevl/Particula/0.1#/`, for example:
+The format of the result is specified at [SwaggerHub Particula](https://app.swaggerhub.com/apis-docs/sillevl/Particula/0.1#/), for example:
 
 ![GET request sensors](images/sensors.png)
 
