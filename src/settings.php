@@ -34,7 +34,7 @@ return function (ContainerBuilder $containerBuilder) {
             'influxDB' => [
                 'host' => getenv('INFLUX_IP'),
                 'port' => getenv('INFLUX_PORT'),
-                'database' => getenv('INFLUX_DB_NAME'),      // needs to be an env var as well !!!
+                'database' => getenv('INFLUX_DB_NAME'),
             ]
         ],
     ]);
