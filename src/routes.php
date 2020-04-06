@@ -21,7 +21,7 @@ return function (App $app) {
     $app->get('/measurements/{id}', MeasurementController::class . ':getMeasurements');
 
     // Sensor routes
-    $app->post('/addsensor', SensorController::class . ':create');
+    $app->post('/sensors', SensorController::class . ':create');
     $app->get('/sensors', SensorController::class . ':index');
     $app->put('/sensors/{id}', SensorController::class . ':edit');
     $app->delete('/sensors/{id}', SensorController::class . ':delete');
@@ -30,7 +30,7 @@ return function (App $app) {
     $app->get('/users', UserController::class . ':index');
     $app->get('/users/{username}', UserController::class . ':details');
 
-    $app->post('/adduser', UserController::class . ':create');
+    $app->post('/users', UserController::class . ':create');
 
     $app->delete('/users/{username}', UserController::class . ':delete');
 
