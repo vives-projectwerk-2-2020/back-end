@@ -21,19 +21,15 @@ return function (App $app) {
     $app->get('/measurements/{id}', MeasurementController::class . ':getMeasurements');
 
     // Sensor routes
-    $app->post('/sensors', SensorController::class . ':create');
     $app->get('/sensors', SensorController::class . ':index');
-    $app->put('/sensors/{id}', SensorController::class . ':edit');
+    $app->post('/sensors', SensorController::class . ':create');
+    $app->put('/sensors/{id}', SensorController::class . ':update');
     $app->delete('/sensors/{id}', SensorController::class . ':delete');
 
     // User routes
     $app->get('/users', UserController::class . ':index');
     $app->get('/users/{username}', UserController::class . ':details');
-
     $app->post('/users', UserController::class . ':create');
-
-    $app->delete('/users/{username}', UserController::class . ':delete');
-
     $app->put('/users/{username}', UserController::class . ':update');
-
+    $app->delete('/users/{username}', UserController::class . ':delete');
 };

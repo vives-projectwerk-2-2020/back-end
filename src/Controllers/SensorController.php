@@ -46,7 +46,7 @@ class SensorController extends AppController
         $sensor->save();
         return $response;
     }
-    public function edit(Request $request, Response $response, $args)
+    public function update(Request $request, Response $response, $args)
     {
         $sensor = Sensor::find($args['id']);
         if ($sensor == null) {
