@@ -70,7 +70,9 @@ Extra informatie in verband met de structuur van deze toepassing is te vinden op
 
 ### Sensors
 
-All sensors with their information can be obtained with following get request:
+The sensors table can be managed using GET, POST, PUT and DELETE request. More information about each request is listed bellow.
+
+All sensors with their information can be obtained with following GET request:
 
 ```
 GET http://<ip>:8080/sensors
@@ -78,17 +80,31 @@ GET http://<ip>:8080/sensors
 
 The format of the result is specified at [SwaggerHub Particula](https://app.swaggerhub.com/apis-docs/sillevl/Particula/0.1#/), for example:
 
-![GET request sensors](images/sensors.png)
+![GET request sensors](images/get_sensors.jpg)
 
-A sensor can be added to the database sending following post request:
+A sensor can be added to the database sending following POST request:
 
 ```
-POST http://<ip>:8080/addsensor
+POST http://<ip>:8080/sensors
 ```
 
 A sensor can only be created if all information is entered:
 
-![addsensor](images/addsensor.png)
+![POST request sensors](images/post_sensors.jpg)
+
+A sensor can be edited by using the sensor id:
+
+```
+PUT http://<ip>:8080/sensors:{id}
+```
+
+![PUT request sensors](images/put_sensors.jpg)
+
+Finally a sensor can be removed by its id:
+
+```
+DELETE http://<ip>:8080/sensors:{id}
+```
 
 ### Users
 
@@ -100,7 +116,7 @@ A list of users can be found using:
 GET http://<ip>:8080/users
 ```
 
-![get_user](images/get_users.png)
+![GET request users](images/get_users.png)
 
 The information of one user can be found by adding the username to the previous request:
 
@@ -116,7 +132,7 @@ POST http://<ip>:8080/users
 
 A user can only be added if all of the following information is provided:
 
-![post_user](images/post_users.png)
+![POST request users](images/post_users.png)
 
 A user can be updated by its username:
 
@@ -124,7 +140,7 @@ A user can be updated by its username:
 PUT http://<ip>:8080/users/{username}
 ```
 
-![put_user](images/put_users.png)
+![PUT request users](images/put_users.png)
 
 At last a user can be deleted using a username:
 
