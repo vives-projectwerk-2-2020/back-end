@@ -34,4 +34,6 @@ return function (App $app) {
 
     $app->delete('/users/{username}', UserController::class . ':delete');
 
+    $app->put('/users/{username}', UserController::class . ':update');
+
 };
