@@ -92,27 +92,45 @@ A sensor can only be created if all information is entered:
 
 ### Users
 
-A list of users can be found using a get request:
+Users can be managed using a GET, POST, PUT or DELETE request. More information about each request and its output can be found underneath.
+
+A list of users can be found using:
 
 ```
 GET http://<ip>:8080/users
 ```
 
-The information of once user can be found by adding the username to the previous request:
+![get_user](images/get_users.png)
+
+The information of one user can be found by adding the username to the previous request:
 
 ```
 GET http://<ip>:8080/users/{username}
 ```
 
-At last a user can be added keeping in mind that a username needs to be unique:
+A new user can be added as follows:
 
 ```
-POST http://<ip>:8080/adduser
+POST http://<ip>:8080/users
 ```
 
-A user exists off the following information:
+A user can only be added if all of the following information is provided:
 
-![adduser](images/adduser.png)
+![post_user](images/post_users.png)
+
+A user can be updated by its username:
+
+```
+PUT http://<ip>:8080/users/{username}
+```
+
+![put_user](images/put_users.png)
+
+At last a user can be deleted using a username:
+
+```
+DELETE http://<ip>:8080/users/{username}
+```
 
 ## Development
 
