@@ -75,7 +75,7 @@ The sensors table can be managed using GET, POST, PUT and DELETE request. More i
 All sensors with their information can be obtained with following GET request:
 
 ```
-GET http://<ip>:8080/sensors
+GET http://<ip>:<port>/sensors
 ```
 
 The format of the result is specified at [SwaggerHub Particula](https://app.swaggerhub.com/apis-docs/sillevl/Particula/0.1#/), for example:
@@ -85,7 +85,7 @@ The format of the result is specified at [SwaggerHub Particula](https://app.swag
 A sensor can be added to the database sending following POST request:
 
 ```
-POST http://<ip>:8080/sensors
+POST http://<ip>:<port>/sensors
 ```
 
 A sensor can only be created if all information is entered:
@@ -95,7 +95,7 @@ A sensor can only be created if all information is entered:
 A sensor can be edited by using the sensor id:
 
 ```
-PUT http://<ip>:8080/sensors:{id}
+PUT http://<ip>:<port>/sensors/{id}
 ```
 
 ![PUT request sensors](images/put_sensors.jpg)
@@ -103,7 +103,7 @@ PUT http://<ip>:8080/sensors:{id}
 Finally a sensor can be removed by its id:
 
 ```
-DELETE http://<ip>:8080/sensors:{id}
+DELETE http://<ip>:<port>/sensors/{id}
 ```
 
 ### Users
@@ -113,7 +113,7 @@ Users can be managed using a GET, POST, PUT or DELETE request. More information 
 A list of users can be found using:
 
 ```
-GET http://<ip>:8080/users
+GET http://<ip>:<port>/users
 ```
 
 ![GET request users](images/get_users.png)
@@ -121,13 +121,13 @@ GET http://<ip>:8080/users
 The information of one user can be found by adding the username to the previous request:
 
 ```
-GET http://<ip>:8080/users/{username}
+GET http://<ip>:<port>/users/{username}
 ```
 
 A new user can be added as follows:
 
 ```
-POST http://<ip>:8080/users
+POST http://<ip>:<port>/users
 ```
 
 A user can only be added if all of the following information is provided:
@@ -137,7 +137,7 @@ A user can only be added if all of the following information is provided:
 A user can be updated by its username:
 
 ```
-PUT http://<ip>:8080/users/{username}
+PUT http://<ip>:<port>/users/{username}
 ```
 
 ![PUT request users](images/put_users.png)
@@ -145,7 +145,7 @@ PUT http://<ip>:8080/users/{username}
 At last a user can be deleted using a username:
 
 ```
-DELETE http://<ip>:8080/users/{username}
+DELETE http://<ip>:<port>/users/{username}
 ```
 
 ## Development
