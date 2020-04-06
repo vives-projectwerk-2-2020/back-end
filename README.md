@@ -116,7 +116,7 @@ A list of users can be found using:
 GET http://<ip>:<port>/users
 ```
 
-![GET request users](images/get_users.png)
+![GET request users](images/get_users.jpg)
 
 The information of one user can be found by adding the username to the previous request:
 
@@ -132,7 +132,7 @@ POST http://<ip>:<port>/users
 
 A user can only be added if all of the following information is provided:
 
-![POST request users](images/post_users.png)
+![POST request users](images/post_users.jpg)
 
 A user can be updated by its username:
 
@@ -140,7 +140,7 @@ A user can be updated by its username:
 PUT http://<ip>:<port>/users/{username}
 ```
 
-![PUT request users](images/put_users.png)
+![PUT request users](images/put_users.jpg)
 
 At last a user can be deleted using a username:
 
