@@ -23,7 +23,7 @@ return function (App $app) {
     // Sensor routes
     $app->post('/addsensor', SensorController::class . ':create');
     $app->get('/sensors', SensorController::class . ':index');
-
+    $app->put('/sensors/{id}', SensorController::class . ':edit');
     $app->delete('/sensors/{id}', SensorController::class . ':delete');
 
     // User routes

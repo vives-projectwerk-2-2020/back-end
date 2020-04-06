@@ -39,6 +39,24 @@ class SensorController extends AppController
         return $response;
     }
 
+    public function create(Request $request, Response $response, $args)
+    {
+        $data = $request->getParsedBody();
+        $sensor = Sensor::create($data);
+        $sensor->save();
+        return $response;
+    }
+    public function edit(Request $request, Response $response, $args)
+    {
+        $sensor = Sensor::find($args['id']);
+        if ($sensor == null) {
+          return $response->withStatus(404);
+        }
+        $data = $request->getParsedBody();
+        $sensor->fill($data);
+        $sensor->save();
+        return $response;
+    }
     public function delete(Request $request, Response $response, $args)
     {
         $sensor = Sensor::find($args['id']);
