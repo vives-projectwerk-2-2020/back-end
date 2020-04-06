@@ -57,7 +57,7 @@ class UserController extends AppController
 
     public function update(Request $request, Response $response, $args)
     {
-        $user = User::where('UserName', $args["username"]);
+        $user = User::where('UserName', $args["username"])->first();
         $data = $request->getParsedBody();
         $user->fill($data);
         $user->save();
