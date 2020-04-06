@@ -24,6 +24,8 @@ return function (App $app) {
     $app->post('/addsensor', SensorController::class . ':create');
     $app->get('/sensors', SensorController::class . ':index');
 
+    $app->delete('/sensors/{id}', SensorController::class . ':delete');
+
     // User routes
     $app->get('/users', UserController::class . ':index');
     $app->post('/adduser', UserController::class . ':create');

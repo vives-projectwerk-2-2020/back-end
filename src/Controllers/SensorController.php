@@ -20,10 +20,12 @@ class SensorController extends AppController
         $sensors = Sensor::all();
         $jsontext = "[";
         foreach ($sensors as $sensor) {
-            $location = array("latitude"=>$sensor->latitude,"longitude"=>$sensor->longitude
-                , "city"=>$sensor->city, "address"=>$sensor->address);
-            $sensor_json = json_encode(array("id"=>$sensor->id, "name"=>$sensor->name
-                , "location"=>$location, "description"=>$sensor->description));
+            $location = array(
+                "latitude" => $sensor->latitude, "longitude" => $sensor->longitude, "city" => $sensor->city, "address" => $sensor->address
+            );
+            $sensor_json = json_encode(array(
+                "id" => $sensor->id, "name" => $sensor->name, "location" => $location, "description" => $sensor->description
+            ));
 
             $jsontext .= $sensor_json . ",";
         }
@@ -37,11 +39,13 @@ class SensorController extends AppController
         return $response;
     }
 
-    public function create(Request $request, Response $response, $args)
+    public function delete(Request $request, Response $response, $args)
     {
-        $data = $request->getParsedBody();
-        $sensor = Sensor::create($data);
-        $sensor->save();
+        $sensor = Sensor::find($args['id']);
+        if ($sensor == null) {
+            return $response->withStatus(404);
+        }
+        $sensor->delete();
         return $response;
     }
 }
