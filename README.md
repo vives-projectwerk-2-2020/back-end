@@ -66,7 +66,7 @@ Extra informatie in verband met de structuur van deze toepassing is te vinden op
 
 ## Routes for MariaDB
 
-`Sensors` and `Users` are stored in a MariaDB database and can be accessed using the GET and POST requests found beneath. 
+`Sensors` and `Users` are stored in a MariaDB database and can be managed with the information provided in this chapter. 
 
 ### Sensors
 
