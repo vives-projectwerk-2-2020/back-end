@@ -47,4 +47,11 @@ class UserController extends AppController
         $response->getBody()->write($jsontext);
         return $response;
     }
+
+    public function delete(Request $request, Response $response, $args)
+    {
+        $user = User::where('UserName', $args["username"]);
+        $user->delete();
+        return $response;
+    }
 }

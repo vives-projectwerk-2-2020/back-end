@@ -28,6 +28,10 @@ return function (App $app) {
 
     // User routes
     $app->get('/users', UserController::class . ':index');
-    $app->post('/adduser', UserController::class . ':create');
     $app->get('/users/{username}', UserController::class . ':details');
+
+    $app->post('/adduser', UserController::class . ':create');
+
+    $app->delete('/users/{username}', UserController::class . ':delete');
+
 };
