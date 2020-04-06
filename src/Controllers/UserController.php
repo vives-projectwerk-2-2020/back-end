@@ -54,4 +54,13 @@ class UserController extends AppController
         $user->delete();
         return $response;
     }
+
+    public function update(Request $request, Response $response, $args)
+    {
+        $user = User::where('UserName', $args["username"]);
+        $data = $request->getParsedBody();
+        $user->fill($data);
+        $user->save();
+        return $response;
+    }
 }
