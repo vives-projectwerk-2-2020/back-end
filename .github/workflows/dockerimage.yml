@@ -7,14 +7,7 @@ on:
     branches: [ develop, master ]
 env:
   IMAGE_NAME: particula-back-end 
-  #BRANCH_NAME: notset
-jobs:
-
-  #setbranchname:
-  #  runs-on: [ubuntu-latest]
-  #  steps:
-  #  - name: Branch name
-  #    run: BRANCH_NAME=$(echo '${{ github.ref }}' | sed -e 's,.*/\(.*\),\1,')       
+jobs:  
 
   build:
     runs-on: ubuntu-latest
