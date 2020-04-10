@@ -21,14 +21,18 @@ jobs:
 
     steps:
     - name: Branch name
-      run: ${{ env.BRANCH_NAME }}=$(echo '${{ github.ref }}' | sed -e 's,.*/\(.*\),\1,')        
+      id: branchname
+      run: |
+        echo "::set-output name=branch::`$(echo '${{ github.ref }}' | sed -e 's,.*/\(.*\),\1,')`"
+          
+    - name: Build      
     - uses: actions/checkout@v2
     - uses: whoan/docker-build-with-cache-action@master
       with:
         username: "${{ github.actor }}"
         password: "${{ secrets.GITHUB_TOKEN }}"
         image_name: vives-projectwerk-2-2020/back-end/particula-back-end
-        image_tag: "${{ env.BRANCH_NAME }}"
+        image_tag: "${{ steps.branchname.outputs.branch }}"
         registry: docker.pkg.github.com
         
   deploy:
