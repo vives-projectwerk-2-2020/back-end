@@ -7,26 +7,28 @@ on:
     branches: [ develop, master ]
 env:
   IMAGE_NAME: particula-back-end 
-  BRANCH_NAME: notset
+  #BRANCH_NAME: notset
 jobs:
 
-  setbranchname:
-    runs-on: [ubuntu-latest]
-    steps:
-    - name: Branch name
-      run: BRANCH_NAME=$(echo '${{ github.ref }}' | sed -e 's,.*/\(.*\),\1,')       
+  #setbranchname:
+  #  runs-on: [ubuntu-latest]
+  #  steps:
+  #  - name: Branch name
+  #    run: BRANCH_NAME=$(echo '${{ github.ref }}' | sed -e 's,.*/\(.*\),\1,')       
 
   build:
     runs-on: ubuntu-latest
 
-    steps:        
+    steps:
+    - name: Branch name
+      run: BRANCH_NAME=$(echo '${{ github.ref }}' | sed -e 's,.*/\(.*\),\1,')        
     - uses: actions/checkout@v2
     - uses: whoan/docker-build-with-cache-action@master
       with:
         username: "${{ github.actor }}"
         password: "${{ secrets.GITHUB_TOKEN }}"
         image_name: vives-projectwerk-2-2020/back-end/particula-back-end
-        image_tag: "${{ env.BRANCH_NAME }}"
+        image_tag: "${{ BRANCH_NAME }}"
         registry: docker.pkg.github.com
         
   deploy:
