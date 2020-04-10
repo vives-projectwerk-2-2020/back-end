@@ -21,7 +21,7 @@ jobs:
 
     steps:
     - name: Branch name
-      run: BRANCH_NAME=$(echo '${{ github.ref }}' | sed -e 's,.*/\(.*\),\1,')        
+      run: ${{ env.BRANCH_NAME }}=$(echo '${{ github.ref }}' | sed -e 's,.*/\(.*\),\1,')        
     - uses: actions/checkout@v2
     - uses: whoan/docker-build-with-cache-action@master
       with:
