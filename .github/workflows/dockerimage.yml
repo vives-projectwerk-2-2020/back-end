@@ -23,7 +23,7 @@ jobs:
     - name: Branch name
       id: branchname
       run: |
-        echo "::set-output name=branch::`$(echo '${{ github.ref }}' | sed -e 's,.*/\(.*\),\1,')`"
+        echo "::set-output name=branch::`echo '${{ github.ref }}' | sed -e 's,.*/\(.*\),\1,'`"
             
     - uses: actions/checkout@v2
     - uses: whoan/docker-build-with-cache-action@master
