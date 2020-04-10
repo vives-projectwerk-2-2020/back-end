@@ -6,12 +6,18 @@ on:
   pull_request:
     branches: [ develop, master ]
 env:
-  IMAGE_NAME: particula-back-end
-  BRANCH_NAME: $(echo '${{ github.ref }}' | sed -e 's,.*/\(.*\),\1,') 
+  IMAGE_NAME: particula-back-end 
 jobs:
 
-  build:
+  setbranchname:
+    runs-on: [ubuntu-latest]
+    steps:
+    - name: Branch name
+      run: BRANCH_NAME=$(echo '${{ github.ref }}' | sed -e 's,.*/\(.*\),\1,')
+      env:
+        BRANCH_NAME: notset
 
+  build:
     runs-on: ubuntu-latest
 
     steps:        
@@ -21,7 +27,7 @@ jobs:
         username: "${{ github.actor }}"
         password: "${{ secrets.GITHUB_TOKEN }}"
         image_name: vives-projectwerk-2-2020/back-end/particula-back-end
-        image_tag: develop
+        image_tag: "${{ jobs.setbranchname.env.BRANCH_NAME }}"
         registry: docker.pkg.github.com
         
   deploy:
