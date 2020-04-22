@@ -42,6 +42,7 @@ class Measurement
 
         if ($period_range == "d") {
             //remove time from response and make response shorter
+            $decoded = $result->getPoints();
         } else {
             //remove time from response
             $decoded = $result->getPoints();
