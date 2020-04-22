@@ -27,7 +27,7 @@ class Measurement
 
         //put the time parameter in easyer to process way
         $period_range =  substr($period, -1);
-        $period_time = (int)substr($period, 0, -1);
+        $period_time = (int) substr($period, 0, -1);
         if ($period_range == "y") {
             $period_time *= 365;
             $period_range = "d";
@@ -36,12 +36,18 @@ class Measurement
         //untested
         $new_date = $period_time . $period_range;
         //echo "select pm10,pm25,temperature,humidity FROM sensors WHERE sensor_id = $id AND time > now() - $new_date";
+
         $query = "select $properties FROM sensors WHERE sensor_id =~ /$id/ AND time > now() - $new_date";
         $result = $database->query($query);
-        //remove time from response
-        $decoded = $result->getPoints();
-        for ($i = 0; $i < count($decoded); $i++) {
-            unset($decoded[$i]['time']);
+
+        if ($period_range == "d") {
+            //remove time from response and make response shorter
+        } else {
+            //remove time from response
+            $decoded = $result->getPoints();
+            for ($i = 0; $i < count($decoded); $i++) {
+                unset($decoded[$i]['time']);
+            }
         }
 
         return $decoded;
