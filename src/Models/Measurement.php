@@ -34,8 +34,8 @@ class Measurement
             $period_range = "d";
         }
 
-        if ($period_range == "pm2.5") {
-            $period_range = "pm25";
+        if ($properties == "pm2.5") {
+            $properties = "pm25";
         }
 
         $new_date = $period_time . $period_range;
