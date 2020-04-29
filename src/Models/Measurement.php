@@ -39,22 +39,16 @@ class Measurement
         $new_date = $period_time . $period_range;
 
         if ($new_date <= "365d") {
-
             $query = "select $properties FROM sensors WHERE sensor_id =~ /$id/ AND time > now() - $new_date GROUP BY time(24h)";
-        } else if ($new_date <= "31d") {
-
+        } elseif ($new_date <= "31d") {
             $query = "select $properties FROM sensors WHERE sensor_id =~ /$id/ AND time > now() - $new_date GROUP BY time(1h)";
-        } else if ($new_date <= "7d") {
-
+        } elseif ($new_date <= "7d") {
             $query = "select $properties FROM sensors WHERE sensor_id =~ /$id/ AND time > now() - $new_date GROUP BY time(30m)";
-        } else if ($new_date <= "1d") {
-
+        } elseif ($new_date <= "1d") {
             $query = "select $properties FROM sensors WHERE sensor_id =~ /$id/ AND time > now() - $new_date GROUP BY time(5m)";
-        } else if ($new_date < "1h") {
-
+        } elseif ($new_date < "1h") {
             $query = "select $properties FROM sensors WHERE sensor_id =~ /$id/ AND time > now() - $new_date GROUP BY time(5m)";
         } else {
-
             $query = "select $properties FROM sensors WHERE sensor_id =~ /$id/ AND time > now() - $new_date";
         }
 
