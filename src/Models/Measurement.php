@@ -36,21 +36,27 @@ class Measurement
 
         $new_date = $period_time . $period_range;
 
-        if ($period_range == "y") {
+        if ($period_range == "all") {
             $query = "select $properties FROM sensors WHERE sensor_id =~ /$id/ 
-                AND time > now() - $new_date GROUP BY time(24h)";
-        } elseif ($period_range == "d" && $period_time >= 31) {
+                GROUP BY time(24h)";
+        } elseif ($period_range == "d" && $period_time = 1095) {
             $query = "select $properties FROM sensors WHERE sensor_id =~ /$id/ 
-                AND time > now() - $new_date GROUP BY time(1h)";
-        } elseif ($period_range == "d" && $period_time >= 7) {
+                AND time > now() - 1095d GROUP BY time(24h)";
+        } elseif ($period_range == "d" && $period_time = 365) {
             $query = "select $properties FROM sensors WHERE sensor_id =~ /$id/ 
-                AND time > now() - $new_date GROUP BY time(30m)";
-        } elseif ($period_range == "d") {
+                AND time > now() - 365d GROUP BY time(24h)";
+        } elseif ($period_range == "d" && $period_time = 30) {
             $query = "select $properties FROM sensors WHERE sensor_id =~ /$id/ 
-                AND time > now() - $new_date GROUP BY time(5m)";
-        } elseif ($period_range == "h" && $period_time > 1) {
+                AND time > now() - 30d GROUP BY time(1h)";
+        } elseif ($period_range == "d" && $period_time = 7) {
             $query = "select $properties FROM sensors WHERE sensor_id =~ /$id/ 
-                AND time > now() - $new_date GROUP BY time(1m)";
+                AND time > now() - 7d GROUP BY time(30m)";
+        } elseif ($period_range == "h" && $period_time = 24) {
+            $query = "select $properties FROM sensors WHERE sensor_id =~ /$id/ 
+                AND time > now() - 24h GROUP BY time(5m)";
+        } elseif ($period_range == "h" && $period_time == 1) {
+            $query = "select $properties FROM sensors WHERE sensor_id =~ /$id/ 
+                AND time > now() - 1h GROUP BY time(1m)";
         } else {
             $query = "select $properties FROM sensors WHERE sensor_id =~ /$id/ 
                 AND time > now() - $new_date";
