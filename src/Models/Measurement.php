@@ -41,9 +41,12 @@ class Measurement
         $new_date = $period_time . $period_range;
 
         $meanProperties = "MEAN($properties)";
+        $time = " AND time > now() - ";
 
-        if ($period_range == "all") {
+        if ($period == "all") {
             $groupBy = " GROUP BY time(3d)";
+            $time = "";
+            $new_date = "";
         } elseif ($period_range == "d" && $period_time == 1095) {
             $groupBy = " GROUP BY time(3d)";
         } elseif ($period_range == "d" && $period_time == 365) {
@@ -62,7 +65,7 @@ class Measurement
         }
 
         $query = "select $meanProperties FROM sensors WHERE sensor_id =~ /$id/ 
-                AND time > now() - $new_date $groupBy";
+            $time $new_date $groupBy";
 
         $result = $database->query($query);
 
