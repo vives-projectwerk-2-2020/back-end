@@ -56,7 +56,7 @@ class Measurement
                 AND time > now() - 24h GROUP BY time(5m)";
         } elseif ($period_range == "h" && $period_time == 1) {
             $query = "select $properties FROM sensors WHERE sensor_id =~ /$id/ 
-                AND time > now() - 1h GROUP BY time(1m)";
+                AND time > now() - 1h";
         } else {
             $query = "select $properties FROM sensors WHERE sensor_id =~ /$id/ 
                 AND time > now() - $new_date";
