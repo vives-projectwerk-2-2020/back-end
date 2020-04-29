@@ -34,6 +34,10 @@ class Measurement
             $period_range = "d";
         }
 
+        if ($period_range == "pm2.5") {
+            $period_range = "pm25";
+        }
+
         $new_date = $period_time . $period_range;
 
         $meanProperties = "MEAN($properties)";
@@ -45,7 +49,7 @@ class Measurement
         } elseif ($period_range == "d" && $period_time == 365) {
             $groupBy = " GROUP BY time(24h)";
         } elseif ($period_range == "d" && $period_time == 30) {
-            $groupBy = " GROUP BY time(4h)";
+            $groupBy = " GROUP BY time(2h)";
         } elseif ($period_range == "d" && $period_time == 7) {
             $groupBy = " GROUP BY time(30m)";
         } elseif ($period_range == "h" && $period_time == 1) {
