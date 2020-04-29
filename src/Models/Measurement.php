@@ -29,7 +29,7 @@ class Measurement
         $period_range =  substr($period, -1);
         $period_time = (int) substr($period, 0, -1);
 
-        if ($period_time == "y") {
+        if ($period_range == "y") {
             $period_time *= 365;
             $period_range = "d";
         }
@@ -56,7 +56,7 @@ class Measurement
                 AND time > now() - 24h GROUP BY time(5m)";
         } elseif ($period_range == "h" && $period_time == 1) {
             $query = "select $properties FROM sensors WHERE sensor_id =~ /$id/ 
-                AND time > now() - 1h";
+                AND time > now() - $new_date";
         } else {
             $query = "select $properties FROM sensors WHERE sensor_id =~ /$id/ 
                 AND time > now() - $new_date";
