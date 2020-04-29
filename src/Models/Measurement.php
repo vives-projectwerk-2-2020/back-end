@@ -47,15 +47,15 @@ class Measurement
             $groupBy = " GROUP BY time(3d)";
             $time = "";
             $new_date = "";
-        } elseif ($period_range == "d" && $period_time == 1095) {
+        } elseif ($new_date == "1095d") {
             $groupBy = " GROUP BY time(3d)";
-        } elseif ($period_range == "d" && $period_time == 365) {
+        } elseif ($new_date == "365d") {
             $groupBy = " GROUP BY time(24h)";
-        } elseif ($period_range == "d" && $period_time == 30) {
+        } elseif ($new_date == "30d") {
             $groupBy = " GROUP BY time(2h)";
-        } elseif ($period_range == "d" && $period_time == 7) {
+        } elseif ($new_date == "7d") {
             $groupBy = " GROUP BY time(30m)";
-        } elseif ($period_range == "h" && $period_time == 1) {
+        } elseif ($new_date == "1h") {
             $groupBy = "";
             $meanProperties = $properties;
         } else {
