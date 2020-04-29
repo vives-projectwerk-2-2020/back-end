@@ -37,22 +37,22 @@ class Measurement
         $new_date = $period_time . $period_range;
 
         if ($period_range == "all") {
-            $query = "select $properties FROM sensors WHERE sensor_id =~ /$id/ 
+            $query = "select MEAN($properties) FROM sensors WHERE sensor_id =~ /$id/ 
                 GROUP BY time(24h)";
         } elseif ($period_range == "d" && $period_time == 1095) {
-            $query = "select $properties FROM sensors WHERE sensor_id =~ /$id/ 
+            $query = "select MEAN($properties) FROM sensors WHERE sensor_id =~ /$id/ 
                 AND time > now() - $new_date GROUP BY time(24h)";
         } elseif ($period_range == "d" && $period_time == 365) {
-            $query = "select $properties FROM sensors WHERE sensor_id =~ /$id/ 
+            $query = "select MEAN($properties) FROM sensors WHERE sensor_id =~ /$id/ 
                 AND time > now() - $new_date GROUP BY time(24h)";
         } elseif ($period_range == "d" && $period_time == 30) {
-            $query = "select $properties FROM sensors WHERE sensor_id =~ /$id/ 
+            $query = "select MEAN($properties) FROM sensors WHERE sensor_id =~ /$id/ 
                 AND time > now() - $new_date GROUP BY time(1h)";
         } elseif ($period_range == "d" && $period_time == 7) {
-            $query = "select $properties FROM sensors WHERE sensor_id =~ /$id/ 
+            $query = "select MEAN($properties) FROM sensors WHERE sensor_id =~ /$id/ 
                 AND time > now() - $new_date GROUP BY time(30m)";
         } elseif ($period_range == "h" && $period_time == 24) {
-            $query = "select $properties FROM sensors WHERE sensor_id =~ /$id/ 
+            $query = "select MEAN($properties) FROM sensors WHERE sensor_id =~ /$id/ 
                 AND time > now() - $new_date GROUP BY time(5m)";
         } elseif ($period_range == "h" && $period_time == 1) {
             $query = "select $properties FROM sensors WHERE sensor_id =~ /$id/ 
