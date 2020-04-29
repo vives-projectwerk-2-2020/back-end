@@ -25,7 +25,7 @@ class Measurement
     {
         $database = self::$database;
 
-        //put the time parameter in easyer to process way
+        //put the time parameter in easier to process way
         $period_range =  substr($period, -1);
         $period_time = (int) substr($period, 0, -1);
 
@@ -35,6 +35,8 @@ class Measurement
         }
 
         $new_date = $period_time . $period_range;
+
+        $meanProperties = "MEAN($properties)";
 
         if ($period_range == "all") {
             $groupBy = " GROUP BY time(3d)";
@@ -48,16 +50,15 @@ class Measurement
             $groupBy = " GROUP BY time(30m)";
         } elseif ($period_range == "h" && $period_time == 1) {
             $groupBy = "";
+            $meanProperties = $properties;
         } else {
             //Default value : 24h
             $groupBy = " GROUP BY time(5m)";
             $new_date = "24h";
         }
 
-        $query = "select $properties FROM sensors WHERE sensor_id =~ /$id/ 
+        $query = "select $meanProperties FROM sensors WHERE sensor_id =~ /$id/ 
                 AND time > now() - $new_date $groupBy";
-
-        //echo "select pm10,pm25,temperature,humidity FROM sensors WHERE sensor_id = $id AND time > now() - $new_date";
 
         $result = $database->query($query);
 
