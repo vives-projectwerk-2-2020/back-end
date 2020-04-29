@@ -28,27 +28,39 @@ class Measurement
         //put the time parameter in easyer to process way
         $period_range =  substr($period, -1);
         $period_time = (int) substr($period, 0, -1);
+
+
+
         if ($period_range == "y") {
             $period_time *= 365;
             $period_range = "d";
         }
 
-        //untested
         $new_date = $period_time . $period_range;
+
+        if ($new_date < "365d") {
+
+            $query = "select $properties FROM sensors WHERE sensor_id =~ /$id/ AND time > now() - $new_date GROUP BY time(24h)";
+        } else if ($new_date < "31d") {
+
+            $query = "select $properties FROM sensors WHERE sensor_id =~ /$id/ AND time > now() - $new_date GROUP BY time(1h)";
+        } else if ($new_date < "7d") {
+
+            $query = "select $properties FROM sensors WHERE sensor_id =~ /$id/ AND time > now() - $new_date GROUP BY time(30m)";
+        } else if ($new_date < "1d") {
+
+            $query = "select $properties FROM sensors WHERE sensor_id =~ /$id/ AND time > now() - $new_date GROUP BY time(5m)";
+        }
+
         //echo "select pm10,pm25,temperature,humidity FROM sensors WHERE sensor_id = $id AND time > now() - $new_date";
 
-        $query = "select $properties FROM sensors WHERE sensor_id =~ /$id/ AND time > now() - $new_date";
         $result = $database->query($query);
 
-        if ($period_range == "d") {
-            //remove time from response and make response shorter
-            $decoded = $result->getPoints();
-        } else {
+        $decoded = $result->getPoints();
+        
+        for ($i = 0; $i < count($decoded); $i++) {
             //remove time from response
-            $decoded = $result->getPoints();
-            for ($i = 0; $i < count($decoded); $i++) {
-                unset($decoded[$i]['time']);
-            }
+            unset($decoded[$i]['time']);
         }
 
         return $decoded;
