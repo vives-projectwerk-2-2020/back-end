@@ -38,19 +38,19 @@ class Measurement
 
         if ($period_range == "y") {
             $query = "select $properties FROM sensors WHERE sensor_id =~ /$id/ 
-                AND time > now() - $new_date GROUP BY time(24h) FILL(0)";
-        }elseif ($period_range == "d" && $period_time >= 31) {
+                AND time > now() - $new_date GROUP BY time(24h)";
+        } elseif ($period_range == "d" && $period_time >= 31) {
             $query = "select $properties FROM sensors WHERE sensor_id =~ /$id/ 
-                AND time > now() - $new_date GROUP BY time(1h) FILL(0)";
-        }elseif ($period_range == "d" && $period_time >= 7) {
+                AND time > now() - $new_date GROUP BY time(1h)";
+        } elseif ($period_range == "d" && $period_time >= 7) {
             $query = "select $properties FROM sensors WHERE sensor_id =~ /$id/ 
-                AND time > now() - $new_date GROUP BY time(30m) FILL(0)";
-        }elseif ($period_range == "d") {
+                AND time > now() - $new_date GROUP BY time(30m)";
+        } elseif ($period_range == "d") {
             $query = "select $properties FROM sensors WHERE sensor_id =~ /$id/ 
-                AND time > now() - $new_date GROUP BY time(5m) FILL(0)";
-        }elseif ($period_range == "h" && $period_time > 1) {
+                AND time > now() - $new_date GROUP BY time(5m)";
+        } elseif ($period_range == "h" && $period_time > 1) {
             $query = "select $properties FROM sensors WHERE sensor_id =~ /$id/ 
-                AND time > now() - $new_date GROUP BY time(1m) FILL(0)";
+                AND time > now() - $new_date GROUP BY time(1m)";
         } else {
             $query = "select $properties FROM sensors WHERE sensor_id =~ /$id/ 
                 AND time > now() - $new_date";
