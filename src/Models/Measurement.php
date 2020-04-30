@@ -25,30 +25,55 @@ class Measurement
     {
         $database = self::$database;
 
-        //put the time parameter in easyer to process way
+        //put the time parameter in easier to process way
         $period_range =  substr($period, -1);
         $period_time = (int) substr($period, 0, -1);
+
         if ($period_range == "y") {
             $period_time *= 365;
             $period_range = "d";
         }
 
-        //untested
-        $new_date = $period_time . $period_range;
-        //echo "select pm10,pm25,temperature,humidity FROM sensors WHERE sensor_id = $id AND time > now() - $new_date";
+        if ($properties == "pm2.5") {
+            $properties = "pm25";
+        }
 
-        $query = "select $properties FROM sensors WHERE sensor_id =~ /$id/ AND time > now() - $new_date";
+        $new_date = $period_time . $period_range;
+
+        $meanProperties = "MEAN($properties)";
+        $time = " AND time > now() - ";
+
+        if ($period == "all") {
+            $groupBy = " GROUP BY time(3d)";
+            $time = "";
+            $new_date = "";
+        } elseif ($new_date == "1095d") {
+            $groupBy = " GROUP BY time(3d)";
+        } elseif ($new_date == "365d") {
+            $groupBy = " GROUP BY time(24h)";
+        } elseif ($new_date == "30d") {
+            $groupBy = " GROUP BY time(2h)";
+        } elseif ($new_date == "7d") {
+            $groupBy = " GROUP BY time(30m)";
+        } elseif ($new_date == "1h") {
+            $groupBy = "";
+            $meanProperties = $properties;
+        } else {
+            //Default value : 24h
+            $groupBy = " GROUP BY time(5m)";
+            $new_date = "24h";
+        }
+
+        $query = "select $meanProperties FROM sensors WHERE sensor_id =~ /$id/ 
+            $time $new_date $groupBy";
+
         $result = $database->query($query);
 
-        if ($period_range == "d") {
-            //remove time from response and make response shorter
-            $decoded = $result->getPoints();
-        } else {
+        $decoded = $result->getPoints();
+
+        for ($i = 0; $i < count($decoded); $i++) {
             //remove time from response
-            $decoded = $result->getPoints();
-            for ($i = 0; $i < count($decoded); $i++) {
-                unset($decoded[$i]['time']);
-            }
+            unset($decoded[$i]['time']);
         }
 
         return $decoded;

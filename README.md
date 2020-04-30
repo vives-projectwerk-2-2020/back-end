@@ -50,17 +50,26 @@ door hierbij het id toe te voegen krijg je een specifieke sensor:
 http://develop.particula.devbitapp.be:8080/measurements/nico-prototype-l432
 ```
 
-Om data te kunnen weergeven moet je een periode en een propertie toevoegen:
+Om data te kunnen weergeven moet je een periode: (Available values : 1h, 24h, 7d, 30d, 1y, 3y, all)
 
+Default value : 24h
 ```
-http://develop.particula.devbitapp.be:8080/measurements/nico-prototype-l432?period=1d&properties=pm25
+http://develop.particula.devbitapp.be:8080/measurements/nico-prototype-l432?period=1d&properties=pm2.5
 ```
 
-in dit geval voegen we de pm2.5 waarde van de sensor van nico dit van de afgelopen 24h.
+in dit geval voegen we de pm2.5 waarde van de sensor van nico dit van de afgelopen 1h.
 
 Dit kan ook weergegeven worden dankzij insomnia:
 
 ![](images/insomnia.PNG)
+
+Wanneer waarden worden opgevraagt die groter zijn dan 1h (24h, 7d, 30d, 1y, 3y, all) wordt er gebruik gemaakt van gemiddeldes dit zodat het aantal responses beperkt blijft tot een 300-400 tal. 
+
+![](images/insomniaMean.PNG)
+
+Wanneer u data opvraagt die nog niet in de data base staat ontvangt u NULL voor de niet bestaande data zoals te zien is hieronder.
+
+![](images/insomniaOld.PNG)
 
 Extra informatie in verband met de structuur van deze toepassing is te vinden op `https://app.swaggerhub.com/apis-docs/sillevl/Particula/0.1#/`
 
