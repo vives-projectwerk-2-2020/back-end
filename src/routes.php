@@ -33,8 +33,12 @@ return function (App $app) {
     $app->put('/users/{username}', UserController::class . ':update');
     $app->delete('/users/{username}', UserController::class . ':delete');
 
-    $app->map(['GET', 'POST', 'PUT', 'DELETE', 'PATCH'], '/{routes:.+}', function (Request $request, Response $response) {
-        $handler = $this->notFoundHandler; // handle using the default Slim page not found handler
-        return $handler($req, $res);
-    });
+    $app->map(
+        ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
+        '/{routes:.+}',
+        function (Request $request, Response $response) {
+            $handler = $this->notFoundHandler; // handle using the default Slim page not found handler
+            return $handler($req, $res);
+        }
+    );
 };
