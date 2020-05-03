@@ -17,7 +17,7 @@ class Measurement
     public static function all()
     {
         $database = self::$database;
-        $result = $database->query('select * from sensors GROUP BY sensor_id');
+        $result = $database->query('select * from sensors WHERE time > now() - 1h GROUP BY sensor_id');
         return $result->getPoints();
     }
 
