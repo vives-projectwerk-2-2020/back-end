@@ -48,9 +48,10 @@ class Measurement
             $time = "";
             $new_date = "";
         } elseif ($new_date == "last") {
-            $groupBy = "ORDER BY ASC LIMIT 1";
+            $groupBy = "GROUP BY * ORDER BY ASC LIMIT 1";
             $time = "";
             $new_date = "";
+            $meanProperties = $properties;
         } elseif ($new_date == "1095d") {
             $groupBy = " GROUP BY time(3d)";
         } elseif ($new_date == "365d") {
