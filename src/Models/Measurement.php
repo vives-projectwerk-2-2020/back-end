@@ -47,6 +47,10 @@ class Measurement
             $groupBy = " GROUP BY time(3d)";
             $time = "";
             $new_date = "";
+        } elseif ($new_date == "last") {
+            $groupBy = "ASC LIMIT 1";
+            $time = ""; 
+            $new_date = "";
         } elseif ($new_date == "1095d") {
             $groupBy = " GROUP BY time(3d)";
         } elseif ($new_date == "365d") {
