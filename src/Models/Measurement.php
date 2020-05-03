@@ -75,12 +75,10 @@ class Measurement
         $result = $database->query($query);
 
         $decoded = $result->getPoints();
-        //for testing if last gets tedected
-        if ($period != "last") {
-            for ($i = 0; $i < count($decoded); $i++) {
-                //remove time from response
-                unset($decoded[$i]['time']);
-            }
+        
+        for ($i = 0; $i < count($decoded); $i++) {
+            //remove time from response
+            unset($decoded[$i]['time']);
         }
         
         return $decoded;
