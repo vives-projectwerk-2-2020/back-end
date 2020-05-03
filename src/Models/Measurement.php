@@ -47,8 +47,8 @@ class Measurement
             $groupBy = " GROUP BY time(3d)";
             $time = "";
             $new_date = "";
-        } elseif ($new_date == "last") {
-            $groupBy = "GROUP BY * ORDER BY ASC LIMIT 1";
+        } elseif ($period == "last") {
+            $groupBy = " LIMIT 1";
             $time = "";
             $new_date = "";
             $meanProperties = $properties;
@@ -75,12 +75,14 @@ class Measurement
         $result = $database->query($query);
 
         $decoded = $result->getPoints();
-
-        for ($i = 0; $i < count($decoded); $i++) {
-            //remove time from response
-            unset($decoded[$i]['time']);
+        //for testing if last gets tedected
+        if ($period != "last") {
+            for ($i = 0; $i < count($decoded); $i++) {
+                //remove time from response
+                unset($decoded[$i]['time']);
+            }
         }
-
+        
         return $decoded;
     }
 }
