@@ -69,18 +69,22 @@ class Measurement
             $new_date = "24h";
         }
 
+        if ($properties == "all" || $properties == "") {
+            $meanProperties = "pm10,humidity,pm25,pressure,temperature";
+        }
+
         $query = "select $meanProperties FROM sensors WHERE sensor_id =~ /$id/ 
             $time $new_date $groupBy";
 
         $result = $database->query($query);
 
         $decoded = $result->getPoints();
-        
+
         // for ($i = 0; $i < count($decoded); $i++) {
         //     //remove time from response
         //     unset($decoded[$i]['time']);
         // }
-        
+
         return $decoded;
     }
 }
