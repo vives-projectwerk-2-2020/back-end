@@ -70,12 +70,12 @@ class Measurement
         }
 
         if ($properties == "all" || $properties == "") {
-            if ($new_date == "1h" || $new_date == "last") {
+            if ($new_date == "1h") {
                 $meanProperties = "pm10,humidity,pm25,
                 pressure,temperature";
             } else {
-                $meanProperties = "MEAN(pm10),MEAN(humidity),MEAN(pm25),
-                MEAN(pressure),MEAN(temperature)";
+                $meanProperties = "pm10(pm10),humidity(humidity),pm25(pm25),
+                pressure(pressure),temperature(temperature)";
             }
         }
 
