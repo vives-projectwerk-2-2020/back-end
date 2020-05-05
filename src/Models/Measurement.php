@@ -74,8 +74,8 @@ class Measurement
                 $meanProperties = "pm10,humidity,pm25,
                 pressure,temperature";
             } else {
-                $meanProperties = "pm10(pm10),humidity(humidity),pm25(pm25),
-                pressure(pressure),temperature(temperature)";
+                $meanProperties = "MEAN(pm10),MEAN(humidity),MEAN(pm25),
+                MEAN(pressure),MEAN(temperature)";
             }
         }
 
