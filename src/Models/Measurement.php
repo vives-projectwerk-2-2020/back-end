@@ -63,7 +63,7 @@ class Measurement
         } elseif ($new_date == "1h") {
             $groupBy = "";
             $meanProperties = $properties;
-        } elseif (($new_date == "1h" || ($period == ""))) {
+        } elseif (($new_date == "24h" || ($period == ""))) {
             //Default value : 24h
             $groupBy = " GROUP BY time(5m)";
             $new_date = "24h";
