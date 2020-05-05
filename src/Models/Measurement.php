@@ -76,10 +76,10 @@ class Measurement
 
         $decoded = $result->getPoints();
         
-        for ($i = 0; $i < count($decoded); $i++) {
-            //remove time from response
-            unset($decoded[$i]['time']);
-        }
+        // for ($i = 0; $i < count($decoded); $i++) {
+        //     //remove time from response
+        //     unset($decoded[$i]['time']);
+        // }
         
         return $decoded;
     }
