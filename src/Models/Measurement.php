@@ -63,17 +63,17 @@ class Measurement
         } elseif ($new_date == "1h") {
             $groupBy = "";
             $meanProperties = $properties;
-        } else {
+        } elseif (($new_date == "1h" || ($new_date == ""))) {
             //Default value : 24h
             $groupBy = " GROUP BY time(5m)";
             $new_date = "24h";
         }
 
-        if (
-            $properties != "pm10" || $properties != "pm2.5" ||
-            $properties != "temperature" || $properties != "humidity" ||
-            $properties != "pressure"
-        ) {
+        if ($properties == "all" || $properties == "") {
+            if ($new_date == "1h") {
+                $meanProperties = "pm10,humidity,pm25,
+                pressure,temperature";
+            }
             $meanProperties = "MEAN(pm10),MEAN(humidity),MEAN(pm25),
                 MEAN(pressure),MEAN(temperature)";
         }
