@@ -69,7 +69,11 @@ class Measurement
             $new_date = "24h";
         }
 
-        if ($properties == "all" || $properties == "") {
+        if (
+            $properties != "pm10" || $properties != "pm2.5" ||
+            $properties != "temperature" || $properties != "humidity" ||
+            $properties != "pressure"
+        ) {
             $meanProperties = "MEAN(pm10),MEAN(humidity),MEAN(pm25),
                 MEAN(pressure),MEAN(temperature)";
         }
