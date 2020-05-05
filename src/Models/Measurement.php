@@ -70,7 +70,7 @@ class Measurement
         }
 
         if ($properties == "all" || $properties == "") {
-            $meanProperties = "pm10,humidity,pm25,pressure,temperature";
+            $meanProperties = "MEAN(pm10,humidity,pm25,pressure,temperature)";
         }
 
         $query = "select $meanProperties FROM sensors WHERE sensor_id =~ /$id/ 
