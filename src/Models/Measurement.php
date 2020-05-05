@@ -70,7 +70,7 @@ class Measurement
         }
 
         if ($properties == "all" || $properties == "") {
-            if ($new_date == "1h") {
+            if ($new_date == "1h" || $new_date == "last") {
                 $meanProperties = "pm10,humidity,pm25,
                 pressure,temperature";
             } else {
