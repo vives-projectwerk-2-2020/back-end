@@ -25,8 +25,7 @@ class SensorController extends AppController
                     "city" => $sensor->city, "address" => $sensor->address
             );
             $sensor_json = json_encode(array(
-                "id" => $sensor->id, "name" => $sensor->name,
-                "guid" => $sensor->guid,
+                "guid" => $sensor->guid, "name" => $sensor->name,
                     "location" => $location, "description" => $sensor->description
             ));
 
