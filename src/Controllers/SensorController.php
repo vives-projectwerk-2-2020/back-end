@@ -26,6 +26,7 @@ class SensorController extends AppController
             );
             $sensor_json = json_encode(array(
                 "id" => $sensor->id, "name" => $sensor->name,
+                "guid" => $sensor->guid,
                     "location" => $location, "description" => $sensor->description
             ));
 
@@ -50,7 +51,7 @@ class SensorController extends AppController
     }
     public function update(Request $request, Response $response, $args)
     {
-        $sensor = Sensor::find($args['id']);
+        $sensor = Sensor::find($args['guid']);
         if ($sensor == null) {
             return $response->withStatus(404);
         }
@@ -61,7 +62,7 @@ class SensorController extends AppController
     }
     public function delete(Request $request, Response $response, $args)
     {
-        $sensor = Sensor::find($args['id']);
+        $sensor = Sensor::find($args['guid']);
         if ($sensor == null) {
             return $response->withStatus(404);
         }
