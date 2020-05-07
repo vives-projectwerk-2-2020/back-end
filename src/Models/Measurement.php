@@ -40,7 +40,7 @@ class Measurement
 
         $new_date = $period_time . $period_range;
 
-        $meanProperties = "MEAN($properties)";
+        $meanProperties = "MEAN($properties) as $properties";
         $time = " AND time > now() - ";
 
         if ($period == "all") {
