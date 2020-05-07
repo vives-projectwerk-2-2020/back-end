@@ -20,4 +20,4 @@ COPY . .
 EXPOSE 3000
 
 # start server
-CMD vendor/bin/phinx migrate && php -S 0.0.0.0:3000 -t public
+CMD composer migrate && php -S 0.0.0.0:3000 -t public
