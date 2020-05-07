@@ -96,10 +96,6 @@ class Measurement
 
         $decoded = $result->getPoints();
 
-        if ($errorMessage == "" && $decoded == "[]") {
-            $errorMessage = "ERROR: 400 Invalid id ";
-        }
-
         // for ($i = 0; $i < count($decoded); $i++) {
         //     //remove time from response
         //     unset($decoded[$i]['time']);
