@@ -6,22 +6,25 @@ on:
   pull_request:
     branches: [ develop, master ]
 env:
-  IMAGE_NAME: particula-back-end
-  BRANCH_NAME: $(echo '${{ github.ref }}' | sed -e 's,.*/\(.*\),\1,') 
-jobs:
+  IMAGE_NAME: particula-back-end 
+jobs:  
 
   build:
-
     runs-on: ubuntu-latest
 
-    steps:        
+    steps:
+    - name: Branch name
+      id: branchname
+      run: |
+        echo "::set-output name=branch::`echo '${{ github.ref }}' | sed -e 's,.*/\(.*\),\1,'`"
+            
     - uses: actions/checkout@v2
     - uses: whoan/docker-build-with-cache-action@master
       with:
         username: "${{ github.actor }}"
         password: "${{ secrets.GITHUB_TOKEN }}"
         image_name: vives-projectwerk-2-2020/back-end/particula-back-end
-        image_tag: develop
+        image_tag: "${{ steps.branchname.outputs.branch }}"
         registry: docker.pkg.github.com
         
   deploy:

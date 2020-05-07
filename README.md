@@ -50,69 +50,112 @@ door hierbij het id toe te voegen krijg je een specifieke sensor:
 http://develop.particula.devbitapp.be:8080/measurements/nico-prototype-l432
 ```
 
-Om data te kunnen weergeven moet je een periode en een propertie toevoegen:
+Om data te kunnen weergeven moet je een periode: (Available values : 1h, 24h, 7d, 30d, 1y, 3y, all)
 
+Default value : 24h
 ```
-http://develop.particula.devbitapp.be:8080/measurements/nico-prototype-l432?period=1d&properties=pm25
+http://develop.particula.devbitapp.be:8080/measurements/nico-prototype-l432?period=1d&properties=pm2.5
 ```
 
-in dit geval voegen we de pm2.5 waarde van de sensor van nico dit van de afgelopen 24h.
+in dit geval voegen we de pm2.5 waarde van de sensor van nico dit van de afgelopen 1h.
 
 Dit kan ook weergegeven worden dankzij insomnia:
 
 ![](images/insomnia.PNG)
 
+Wanneer waarden worden opgevraagt die groter zijn dan 1h (24h, 7d, 30d, 1y, 3y, all) wordt er gebruik gemaakt van gemiddeldes dit zodat het aantal responses beperkt blijft tot een 300-400 tal. 
+
+![](images/insomniaMean.PNG)
+
+Wanneer u data opvraagt die nog niet in de data base staat ontvangt u NULL voor de niet bestaande data zoals te zien is hieronder.
+
+![](images/insomniaOld.PNG)
+
 Extra informatie in verband met de structuur van deze toepassing is te vinden op `https://app.swaggerhub.com/apis-docs/sillevl/Particula/0.1#/`
 
 ## Routes for MariaDB
 
-`Sensors` and `Users` are stored in a MariaDB database and can be accessed using the GET and POST requests found beneath. 
+`Sensors` and `Users` are stored in a MariaDB database and can be managed with the information provided in this chapter. 
 
 ### Sensors
 
-All sensors with their information can be obtained with following get request:
+The sensors table can be managed using GET, POST, PUT and DELETE request. More information about each request is listed bellow.
+
+All sensors with their information can be obtained with following GET request:
 
 ```
-GET http://<ip>:8080/sensors
+GET http://<ip>:<port>/sensors
 ```
 
 The format of the result is specified at [SwaggerHub Particula](https://app.swaggerhub.com/apis-docs/sillevl/Particula/0.1#/), for example:
 
-![GET request sensors](images/sensors.png)
+![GET request sensors](images/get_sensors.jpg)
 
-A sensor can be added to the database sending following post request:
+A sensor can be added to the database sending following POST request:
 
 ```
-POST http://<ip>:8080/addsensor
+POST http://<ip>:<port>/sensors
 ```
 
 A sensor can only be created if all information is entered:
 
-![addsensor](images/addsensor.png)
+![POST request sensors](images/post_sensors.jpg)
+
+A sensor can be edited by using the sensor id:
+
+```
+PUT http://<ip>:<port>/sensors/{id}
+```
+
+![PUT request sensors](images/put_sensors.jpg)
+
+Finally a sensor can be removed by its id:
+
+```
+DELETE http://<ip>:<port>/sensors/{id}
+```
 
 ### Users
 
-A list of users can be found using a get request:
+Users can be managed using a GET, POST, PUT or DELETE request. More information about each request and its output can be found underneath.
+
+A list of users can be found using:
 
 ```
-GET http://<ip>:8080/users
+GET http://<ip>:<port>/users
 ```
 
-The information of once user can be found by adding the username to the previous request:
+![GET request users](images/get_users.jpg)
+
+The information of one user can be found by adding the username to the previous request:
 
 ```
-GET http://<ip>:8080/users/{username}
+GET http://<ip>:<port>/users/{username}
 ```
 
-At last a user can be added keeping in mind that a username needs to be unique:
+A new user can be added as follows:
 
 ```
-POST http://<ip>:8080/adduser
+POST http://<ip>:<port>/users
 ```
 
-A user exists off the following information:
+A user can only be added if all of the following information is provided:
 
-![adduser](images/adduser.png)
+![POST request users](images/post_users.jpg)
+
+A user can be updated by its username:
+
+```
+PUT http://<ip>:<port>/users/{username}
+```
+
+![PUT request users](images/put_users.jpg)
+
+At last a user can be deleted using a username:
+
+```
+DELETE http://<ip>:<port>/users/{username}
+```
 
 ## Development
 
