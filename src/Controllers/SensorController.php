@@ -75,21 +75,20 @@ class SensorController extends AppController
     public function details(Request $request, Response $response, $args)
     {
         $sensor = Sensor::find($args['guid']);
-
+ 
         $location = array(
             "latitude" => $sensor->latitude, "longitude" => $sensor->longitude,
-                "city" => $sensor->city, "address" => $sensor->address
+            "city" => $sensor->city, "address" => $sensor->address
         );
+ 
+        $measurements = Measurement::find(5, "last", "all");
+        
         $sensor_json = json_encode(array(
             "guid" => $sensor->guid, "name" => $sensor->name,
-                "location" => $location, "description" => $sensor->description
+            "location" => $location, "description" => $sensor->description,
+            "measurements" => $measurements
         ));
-
-        $measurements = Measurement::find(5, "last", "all");
-        json_encode($measurements);
-
-        $sensor_json .= $measurements;
-
+    
         $response->getBody()->write($sensor_json);
         return $response;
     }
