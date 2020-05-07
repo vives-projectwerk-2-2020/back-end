@@ -48,6 +48,7 @@ class SensorController extends AppController
         $sensor->save();
         return $response;
     }
+
     public function update(Request $request, Response $response, $args)
     {
         $sensor = Sensor::find($args['guid']);
@@ -59,6 +60,7 @@ class SensorController extends AppController
         $sensor->save();
         return $response;
     }
+
     public function delete(Request $request, Response $response, $args)
     {
         $sensor = Sensor::find($args['guid']);
@@ -66,6 +68,32 @@ class SensorController extends AppController
             return $response->withStatus(404);
         }
         $sensor->delete();
+        return $response;
+    }
+
+    public function details(Request $request, Response $response, $args)
+    {
+        $users = Sensor::find($args['guid']);
+        $jsontext = "[";
+        foreach ($sensors as $sensor) {
+            $location = array(
+                "latitude" => $sensor->latitude, "longitude" => $sensor->longitude,
+                    "city" => $sensor->city, "address" => $sensor->address
+            );
+            $sensor_json = json_encode(array(
+                "guid" => $sensor->guid, "name" => $sensor->name,
+                    "location" => $location, "description" => $sensor->description
+            ));
+
+            $jsontext .= $sensor_json . ",";
+        }
+
+        if ($sensors->count() > 0) {
+            $jsontext = substr_replace($jsontext, '', -1);
+        }
+        $jsontext .= "]";
+
+        $response->getBody()->write($jsontext);
         return $response;
     }
 }
