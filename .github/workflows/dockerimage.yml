@@ -6,13 +6,8 @@ on:
   pull_request:
     branches: [ develop, master ]
 env:
-<<<<<<< HEAD
   IMAGE_NAME: particula-back-end
 jobs:
-=======
-  IMAGE_NAME: particula-back-end 
-jobs:  
->>>>>>> develop
 
   build:
     runs-on: ubuntu-latest
@@ -21,12 +16,7 @@ jobs:
     - name: Branch name
       id: branchname
       run: |
-<<<<<<< HEAD
         echo "::set-output name=branch::`echo '${{ github.ref }}' | sed -e 's,.*/\(.*\),\1,'`"        
-=======
-        echo "::set-output name=branch::`echo '${{ github.ref }}' | sed -e 's,.*/\(.*\),\1,'`"
-            
->>>>>>> develop
     - uses: actions/checkout@v2
     - uses: whoan/docker-build-with-cache-action@master
       with:
