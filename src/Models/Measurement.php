@@ -96,7 +96,7 @@ class Measurement
 
         $decoded = $result->getPoints();
 
-        if ($errorMessage == "" && $decoded == "") {
+        if ($errorMessage == "" && $decoded == "[]") {
             $errorMessage = "ERROR: 400 Invalid id ";
         }
 
