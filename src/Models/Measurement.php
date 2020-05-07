@@ -81,10 +81,9 @@ class Measurement
             }
         }
 
-        if (
-            $properties != "all" || $properties != "" || $properties != "pm10" || $properties != "humidity"
-            || $properties != "pm25" || $properties != "pressure" || $properties != "temperature"
-        ) {
+        if ($properties != "all" || $properties != "" || $properties != "pm10" || $properties != "humidity"
+            || $properties != "pm25" || $properties != "pressure" || $properties != "temperature")
+            {
             $errorMessage = "ERROR: 400 Invalid properties ";
         }
 
@@ -95,17 +94,19 @@ class Measurement
 
         $decoded = $result->getPoints();
 
-        // if ($errorMessage == "" && $decoded == "") {
-        //     $errorMessage = "ERROR: 400 Invalid id ";
-        // }
-
-        $decoded = $decoded + $errorMessage;
+        if ($errorMessage == "" && $decoded == "") {
+            $errorMessage = "ERROR: 400 Invalid id ";
+        }
 
         // for ($i = 0; $i < count($decoded); $i++) {
         //     //remove time from response
         //     unset($decoded[$i]['time']);
         // }
 
-        return $decoded;
+        if ($errorMessage == "") {
+            return $decoded;
+        } else {
+            return $errorMessage;
+        }
     }
 }
