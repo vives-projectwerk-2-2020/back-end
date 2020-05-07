@@ -81,7 +81,7 @@ class SensorController extends AppController
             "city" => $sensor->city, "address" => $sensor->address
         );
  
-        $measurements = Measurement::find(5, "last", "all");
+        $measurements = Measurement::find($args['guid'], "last", "all");
         
         $sensor_json = json_encode(array(
             "guid" => $sensor->guid, "name" => $sensor->name,
