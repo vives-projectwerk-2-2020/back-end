@@ -37,6 +37,7 @@ class Sensors extends AbstractMigration
         $table = $this->table('sensors', ['id' => false, 'primary_key' => 'id']);
         $table
             ->addColumn('id', 'string')
+            ->addColumn('guid', 'string')
             ->addColumn('name', 'string')
             ->addColumn('latitude', 'float')
             ->addColumn('longitude', 'float')
