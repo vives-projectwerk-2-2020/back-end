@@ -7,6 +7,7 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
 use App\Models\Sensor;
+use App\Models\Measurement;
 
 class SensorController extends AppController
 {
@@ -83,7 +84,12 @@ class SensorController extends AppController
             "guid" => $sensor->guid, "name" => $sensor->name,
                 "location" => $location, "description" => $sensor->description
         ));
-    
+
+        $measurements = Measurement::find(5, "last", "all");
+        json_encode($measurements);
+
+        $sensor_json .= $measurements;
+
         $response->getBody()->write($sensor_json);
         return $response;
     }
