@@ -81,21 +81,23 @@ class Measurement
             }
         }
 
-        if ($properties != "all" || $properties != "" || $properties != "pm10" || $properties != "humidity"
-            || $properties != "pm25" || $properties != "pressure" || $properties != "temperature") {
-                $errorMessage = "ERROR: 400 Invalid properties ";
-            }
+        if (
+            $properties != "all" || $properties != "" || $properties != "pm10" || $properties != "humidity"
+            || $properties != "pm25" || $properties != "pressure" || $properties != "temperature"
+        ) {
+            $errorMessage = "ERROR: 400 Invalid properties ";
+        }
 
-            $query = "select $meanProperties FROM sensors WHERE guid =~ /$id/ 
+        $query = "select $meanProperties FROM sensors WHERE guid =~ /$id/ 
             $time $new_date $groupBy";
 
         $result = $database->query($query);
 
         $decoded = $result->getPoints();
 
-        if ($errorMessage == "" && $decoded == "") {
-            $errorMessage = "ERROR: 400 Invalid id ";
-        }
+        // if ($errorMessage == "" && $decoded == "") {
+        //     $errorMessage = "ERROR: 400 Invalid id ";
+        // }
 
         $decoded = $decoded + $errorMessage;
 
