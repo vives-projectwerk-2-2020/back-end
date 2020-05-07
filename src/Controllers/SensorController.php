@@ -84,8 +84,7 @@ class SensorController extends AppController
                 "location" => $location, "description" => $sensor->description
         ));
     
-        $jsontext .= "]";
-        $response->getBody()->write($jsontext);
+        $response->getBody()->write($sensor_json);
         return $response;
     }
 }
