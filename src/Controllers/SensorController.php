@@ -73,7 +73,7 @@ class SensorController extends AppController
 
     public function details(Request $request, Response $response, $args)
     {
-        $users = Sensor::find($args['guid']);
+        $sensors = Sensor::find($args['guid']);
         $jsontext = "[";
         foreach ($sensors as $sensor) {
             $location = array(
