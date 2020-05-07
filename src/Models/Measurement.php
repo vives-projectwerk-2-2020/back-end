@@ -86,7 +86,7 @@ class Measurement
         }
 
         if ($validProperties) {
-            $errorMessage = "ERROR: 400 Invalid properties ";
+            $errorMessage = $errorMessage."ERROR: 400 Invalid properties ";
         }
 
         $query = "select $meanProperties FROM sensors WHERE guid =~ /$id/ 
@@ -97,7 +97,7 @@ class Measurement
         $decoded = $result->getPoints();
 
         if ($errorMessage == "" &&  empty($decoded)) {
-            $errorMessage = "ERROR: 400 Invalid id ";
+            $errorMessage = $errorMessage."ERROR: 400 Invalid id ";
         }
 
 
