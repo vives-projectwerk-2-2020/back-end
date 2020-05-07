@@ -44,20 +44,21 @@ dat we de meetingen willen opvragen:
 http://develop.particula.devbitapp.be:8080/measurements
 ```
 
-door hierbij het id toe te voegen krijg je een specifieke sensor:
+door hierbij het GUID toe te voegen krijg je een specifieke sensor:
 
 ```
-http://develop.particula.devbitapp.be:8080/measurements/nico-prototype-l432
+http://develop.particula.devbitapp.be:8080/measurements/{GUID}
 ```
 
-Om data te kunnen weergeven moet je een periode: (Available values : 1h, 24h, 7d, 30d, 1y, 3y, all)
+Om data te kunnen weergeven moet je een periode meegeven: (Available values : 1h, 24h, 7d, 30d, 1y, 3y, all)
 
 Default value : 24h
+
 ```
-http://develop.particula.devbitapp.be:8080/measurements/nico-prototype-l432?period=1d&properties=pm2.5
+http://develop.particula.devbitapp.be:8080/measurements/{GUID}?period=1h&properties=pm2.5
 ```
 
-in dit geval voegen we de pm2.5 waarde van de sensor van nico dit van de afgelopen 1h.
+in dit geval voegen we de pm2.5 waarde van de sensor toe en dit voor het afgelopen 1h.
 
 Dit kan ook weergegeven worden dankzij insomnia:
 
