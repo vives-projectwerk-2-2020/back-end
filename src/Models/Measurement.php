@@ -67,6 +67,8 @@ class Measurement
             //Default value : 24h
             $groupBy = " GROUP BY time(5m)";
             $new_date = "24h";
+        } else {
+            $errorMessage = "ERROR: 400 Invalid Period ";
         }
 
         if ($properties == "all" || $properties == "") {
@@ -79,12 +81,23 @@ class Measurement
             }
         }
 
-        $query = "select $meanProperties FROM sensors WHERE guid =~ /$id/ 
+        if ($properties != "all" || $properties != "" || $properties != "pm10" || $properties != "humidity"
+            || $properties != "pm25" || $properties != "pressure" || $properties != "temperature") {
+                $errorMessage = "ERROR: 400 Invalid properties ";
+            }
+
+            $query = "select $meanProperties FROM sensors WHERE guid =~ /$id/ 
             $time $new_date $groupBy";
 
         $result = $database->query($query);
 
         $decoded = $result->getPoints();
+
+        if ($errorMessage == "" && $decoded == "") {
+            $errorMessage = "ERROR: 400 Invalid id ";
+        }
+
+        $decoded = $decoded + $errorMessage;
 
         // for ($i = 0; $i < count($decoded); $i++) {
         //     //remove time from response
