@@ -22,9 +22,10 @@ return function (App $app) {
 
     // Sensor routes
     $app->get('/sensors', SensorController::class . ':index');
+    $app->get('/sensors/{guid}', SensorController::class . ':details');
     $app->post('/sensors', SensorController::class . ':create');
-    $app->put('/sensors/{id}', SensorController::class . ':update');
-    $app->delete('/sensors/{id}', SensorController::class . ':delete');
+    $app->put('/sensors/{guid}', SensorController::class . ':update');
+    $app->delete('/sensors/{guid}', SensorController::class . ':delete');
 
     // User routes
     $app->get('/users', UserController::class . ':index');
@@ -32,4 +33,13 @@ return function (App $app) {
     $app->post('/users', UserController::class . ':create');
     $app->put('/users/{username}', UserController::class . ':update');
     $app->delete('/users/{username}', UserController::class . ':delete');
+
+    $app->map(
+        ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
+        '/{routes:.+}',
+        function (Request $request, Response $response) {
+            $handler = $this->notFoundHandler; // handle using the default Slim page not found handler
+            return $handler($req, $res);
+        }
+    );
 };

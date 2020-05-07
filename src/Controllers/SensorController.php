@@ -7,6 +7,7 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
 use App\Models\Sensor;
+use App\Models\Measurement;
 
 class SensorController extends AppController
 {
@@ -25,7 +26,7 @@ class SensorController extends AppController
                     "city" => $sensor->city, "address" => $sensor->address
             );
             $sensor_json = json_encode(array(
-                "id" => $sensor->id, "name" => $sensor->name,
+                "guid" => $sensor->guid, "name" => $sensor->name,
                     "location" => $location, "description" => $sensor->description
             ));
 
@@ -48,9 +49,10 @@ class SensorController extends AppController
         $sensor->save();
         return $response;
     }
+
     public function update(Request $request, Response $response, $args)
     {
-        $sensor = Sensor::find($args['id']);
+        $sensor = Sensor::find($args['guid']);
         if ($sensor == null) {
             return $response->withStatus(404);
         }
@@ -59,13 +61,35 @@ class SensorController extends AppController
         $sensor->save();
         return $response;
     }
+
     public function delete(Request $request, Response $response, $args)
     {
-        $sensor = Sensor::find($args['id']);
+        $sensor = Sensor::find($args['guid']);
         if ($sensor == null) {
             return $response->withStatus(404);
         }
         $sensor->delete();
+        return $response;
+    }
+
+    public function details(Request $request, Response $response, $args)
+    {
+        $sensor = Sensor::find($args['guid']);
+ 
+        $location = array(
+            "latitude" => $sensor->latitude, "longitude" => $sensor->longitude,
+            "city" => $sensor->city, "address" => $sensor->address
+        );
+ 
+        $measurements = Measurement::find($args['guid'], "last", "all");
+        
+        $sensor_json = json_encode(array(
+            "guid" => $sensor->guid, "name" => $sensor->name,
+            "location" => $location, "description" => $sensor->description,
+            "measurements" => $measurements
+        ));
+    
+        $response->getBody()->write($sensor_json);
         return $response;
     }
 }
