@@ -40,6 +40,10 @@ class Measurement
 
         $new_date = $period_time . $period_range;
 
+        $validProperties = $properties != "all" && $properties != "" && $properties != "pm10" 
+            && $properties != "humidity" && $properties != "pm25" && $properties != "pressure" 
+            && $properties != "temperature";
+
         $meanProperties = "MEAN($properties) as $properties";
         $time = " AND time > now() - ";
 
@@ -81,10 +85,8 @@ class Measurement
             }
         }
 
-        if ($properties != "all" || $properties != "" || $properties != "pm10" || $properties != "humidity"
-            || $properties != "pm25" || $properties != "pressure" || $properties != "temperature")
-            {
-            $errorMessage = "ERROR: 400 Invalid properties ";
+        if ($validProperties) {
+            $errorMessage += "ERROR: 400 Invalid properties ";
         }
 
         $query = "select $meanProperties FROM sensors WHERE guid =~ /$id/ 
@@ -95,7 +97,7 @@ class Measurement
         $decoded = $result->getPoints();
 
         if ($errorMessage == "" && $decoded == "") {
-            $errorMessage = "ERROR: 400 Invalid id ";
+            $errorMessage += "ERROR: 400 Invalid id ";
         }
 
         // for ($i = 0; $i < count($decoded); $i++) {
