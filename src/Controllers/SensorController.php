@@ -61,7 +61,7 @@ class SensorController extends AppController
     }
     public function delete(Request $request, Response $response, $args)
     {
-        $sensor = Sensor::find($args['guid']);
+        $sensor = Sensor::find($args['name']);
         if ($sensor == null) {
             return $response->withStatus(404);
         }
