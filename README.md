@@ -87,7 +87,7 @@ All sensors with their information can be obtained with following GET request:
 GET http://<ip>:<port>/sensors
 ```
 
-The format of the result is specified at [SwaggerHub Particula](https://app.swaggerhub.com/apis-docs/sillevl/Particula/0.1#/), for example:
+The format of the result is specified at [SwaggerHub Particula](https://app.swaggerhub.com/apis-docs/sillevl/Particula), for example:
 
 ![GET request sensors](images/get_sensors.jpg)
 
@@ -99,20 +99,20 @@ POST http://<ip>:<port>/sensors
 
 A sensor can only be created if all information is entered:
 
-![POST request sensors](images/post_sensors.jpg)
+![POST request sensors](images/get_sensors.jpg)
 
-A sensor can be edited by using the sensor id:
+A sensor can be edited by using the sensor GUID:
 
 ```
-PUT http://<ip>:<port>/sensors/{id}
+PUT http://<ip>:<port>/sensors/{GUID}
 ```
 
 ![PUT request sensors](images/put_sensors.jpg)
 
-Finally a sensor can be removed by its id:
+Finally a sensor can be removed by its GUID:
 
 ```
-DELETE http://<ip>:<port>/sensors/{id}
+DELETE http://<ip>:<port>/sensors/{GUID}
 ```
 
 ### Users
