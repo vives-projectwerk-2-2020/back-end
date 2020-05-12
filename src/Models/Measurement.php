@@ -56,7 +56,7 @@ class Measurement
             $time = "";
             $new_date = "";
         } elseif ($period == "last") {
-            $groupBy = " order by desc LIMIT 1";
+            $groupBy = " LIMIT 1";
             $time = "";
             $new_date = "";
             $meanProperties = $properties;
@@ -80,7 +80,7 @@ class Measurement
         }
 
         if ($properties == "all" || $properties == "") {
-            if ($new_date == "1h") {
+            if ($new_date == "1h" || $period == "last") {
                 $meanProperties = "pm10,humidity,pm25,
                 pressure,temperature";
             } else {
