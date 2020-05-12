@@ -26,7 +26,7 @@ class Measurement
         $database = self::$database;
 
         //convert guid to dev_id
-        $sensor = Sensor::find($args['guid']);
+        $sensor = Sensor::find($id);
         $id = $sensor->name;
 
         //put the time parameter in easier to process way
