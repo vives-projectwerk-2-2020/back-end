@@ -17,13 +17,17 @@ class Measurement
     public static function all()
     {
         $database = self::$database;
-        $result = $database->query('select * from sensors WHERE time > now() - 1h GROUP BY guid');
+        $result = $database->query('select * from sensors WHERE time > now() - 1h GROUP BY sensor_id');
         return $result->getPoints();
     }
 
     public static function find($id, $period, $properties)
     {
         $database = self::$database;
+
+        //convert guid to dev_id
+        $sensor = Sensor::find($args['guid']);
+        $id = $sensor->name;
 
         //put the time parameter in easier to process way
         $period_range =  substr($period, -1);
@@ -89,7 +93,7 @@ class Measurement
             $errorMessage = "ERROR: 400 Invalid properties ";
         }
 
-        $query = "select $meanProperties FROM sensors WHERE guid =~ /$id/ 
+        $query = "select $meanProperties FROM sensors WHERE sensor_id =~ /$id/ 
             $time $new_date $groupBy";
 
         $result = $database->query($query);
