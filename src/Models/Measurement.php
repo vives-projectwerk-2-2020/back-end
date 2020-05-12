@@ -21,6 +21,14 @@ class Measurement
         return $result->getPoints();
     }
 
+    function debug_to_console($data) {
+        $output = $data;
+        if (is_array($output))
+            $output = implode(',', $output);
+    
+        echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
+    }
+
     public static function find($id, $period, $properties)
     {
         $database = self::$database;
@@ -95,6 +103,8 @@ class Measurement
 
         $query = "select $meanProperties FROM sensors WHERE sensor_id =~ /$id/ 
             $time $new_date $groupBy";
+
+        debug_to_console(query);
 
         $result = $database->query($query);
 
