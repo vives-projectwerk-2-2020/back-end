@@ -56,7 +56,7 @@ class Measurement
             $time = "";
             $new_date = "";
         } elseif ($period == "last") {
-            $groupBy = " LIMIT 1";
+            $groupBy = " order by desc LIMIT 1";
             $time = "";
             $new_date = "";
             $meanProperties = $properties;
@@ -101,7 +101,7 @@ class Measurement
         $decoded = $result->getPoints();
 
         if ($errorMessage == "" &&  empty($decoded)) {
-            $errorMessage = "ERROR: 400 Invalid id ";
+            $errorMessage = "ERROR: 400 Invalid id";
         }
 
 
