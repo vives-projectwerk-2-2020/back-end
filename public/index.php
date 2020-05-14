@@ -31,44 +31,16 @@ $containerBuilder['notFoundHandler'] = function ($containerBuilder) {
 // Build PHP-DI Container instance
 $container = $containerBuilder->build();
 
-
 // Instantiate the app
 AppFactory::setContainer($container);
 $app = AppFactory::create();
-
-//overwrite not found exeption
-$customErrorHandler = function (
-    ServerRequestInterface $request,
-    Throwable $exception,
-    bool $displayErrorDetails,
-    bool $logErrors,
-    bool $logErrorDetails,
-    ?LoggerInterface $logger = null
-) use ($app) {
-
-    return $response->getBody()->write($exception);
-    if ($exception == 'HttpNotFoundException')
-    {
-        return $response->withJson('test', 404);
-    }
-
-    $logger->error($exception->getMessage());
-
-    $payload = ['error' => $exception->getMessage()];
-
-    $response = $app->getResponseFactory()->createResponse();
-    $response->getBody()->write(
-        json_encode($payload, JSON_UNESCAPED_UNICODE)
-    );
-
-    return $response;
-};
 
 // Register middleware
 $app->addRoutingMiddleware();
 $app->addBodyParsingMiddleware();
 $app->addErrorMiddleware(true, true, true);
-$errorMiddleware->setDefaultErrorHandler($customErrorHandler);
+$errorHandler = $errorMiddleware->getDefaultErrorHandler();
+$errorHandler->registerErrorRenderer('json', ErrorController::class);
 
 // Register middleware
 $middleware = require __DIR__ . '/../src/middleware.php';
