@@ -35,7 +35,7 @@ $container = $containerBuilder->build();
 $container['notFoundHandler'] = function ($c) {
     return function ($request, $response) use ($c) {
         $error = json_encode("route not found");
-        return $response->withJson($error, 404);
+        return $c['response']->withJson($error, 404);
     };
 };
 
