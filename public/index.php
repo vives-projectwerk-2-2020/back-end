@@ -36,6 +36,34 @@ $container = $containerBuilder->build();
 AppFactory::setContainer($container);
 $app = AppFactory::create();
 
+//overwrite not found exeption
+$customErrorHandler = function (
+    ServerRequestInterface $request,
+    Throwable $exception,
+    bool $displayErrorDetails,
+    bool $logErrors,
+    bool $logErrorDetails,
+    ?LoggerInterface $logger = null
+) use ($app) {
+
+    return $response->getBody()->write($exception);
+    if ($exception == 'HttpNotFoundException')
+    {
+        return $response->withJson('test', 404);
+    }
+
+    $logger->error($exception->getMessage());
+
+    $payload = ['error' => $exception->getMessage()];
+
+    $response = $app->getResponseFactory()->createResponse();
+    $response->getBody()->write(
+        json_encode($payload, JSON_UNESCAPED_UNICODE)
+    );
+
+    return $response;
+};
+
 // Register middleware
 $app->addRoutingMiddleware();
 $app->addBodyParsingMiddleware();
@@ -52,14 +80,14 @@ $routes($app);
 $app->getContainer()->get('Illuminate\Database\Capsule\Manager');
 $app->getContainer()->get('influxDB');
 
-//overwrite notfoundhanler to return 404
-unset($app->getContainer()['notFoundHandler']);
-$app->getContainer()['notFoundHandler'] = function ($container) {
-    return function ($request, $response) use ($container) {
-        $error = json_encode("route not found");
-        return $response->withJson($error, 400);
-    };
-};
+// //overwrite notfoundhanler to return 404
+// unset($app->getContainer()['notFoundHandler']);
+// $app->getContainer()['notFoundHandler'] = function ($container) {
+//     return function ($request, $response) use ($container) {
+//         $error = json_encode("route not found");
+//         return $response->withJson($error, 400);
+//     };
+// };
 
 // Run app
 $app->run();
