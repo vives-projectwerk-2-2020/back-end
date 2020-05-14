@@ -68,6 +68,7 @@ $customErrorHandler = function (
 $app->addRoutingMiddleware();
 $app->addBodyParsingMiddleware();
 $app->addErrorMiddleware(true, true, true);
+$errorMiddleware->setDefaultErrorHandler($customErrorHandler);
 
 // Register middleware
 $middleware = require __DIR__ . '/../src/middleware.php';
