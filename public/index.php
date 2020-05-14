@@ -20,6 +20,14 @@ $settings($containerBuilder);
 $dependencies = require __DIR__ . '/../src/dependencies.php';
 $dependencies($containerBuilder);
 
+//overwrite notfoundhanler to return 404
+$containerBuilder['notFoundHandler'] = function ($containerBuilder) {
+    return function ($request, $response) use ($containerBuilder) {
+        $error = json_encode("route not found");
+        return $response->withJson($error, 404);
+    };
+};
+
 // Build PHP-DI Container instance
 $container = $containerBuilder->build();
 
