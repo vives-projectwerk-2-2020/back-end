@@ -36,18 +36,25 @@ $customErrorHandler = function (
     bool $logErrorDetails
 ) use ($app) {
     $response = $app->getResponseFactory()->createResponse();
-    // seems the followin can be replaced by your custom response
-    // $page = new Alvaro\Pages\Error($c);
-    // return $page->notFound404($request, $response);
-    $response->withJson(404);
-    return $response;
+
+        if ($exception instanceof HttpNotFoundException) {
+            $message = 'not found';
+            $code = 504;
+        } elseif ($exception instanceof HttpMethodNotAllowedException) {
+            $message = 'not allowed';
+            $code = 403;
+        }
+        // ...other status codes, messages, or generally other responses for other types of exceptions
+
+    $response->getBody()->write($message);
+    return $response->withStatus($code);
 };
 
 // Register middleware
 $app->addRoutingMiddleware();
 $app->addBodyParsingMiddleware();
 $errorMiddleware = $app->addErrorMiddleware(true, true, true);
-$errorMiddleware->setErrorHandler(Slim\Exception\HttpNotFoundException::class, $customErrorHandler);
+$errorMiddleware->setDefaultErrorHandler($customErrorHandler);
 
 // Register middleware
 $middleware = require __DIR__ . '/../src/middleware.php';
