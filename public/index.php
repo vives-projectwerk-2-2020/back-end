@@ -36,7 +36,7 @@ $customErrorHandler = function (
     bool $logErrorDetails
 ) use ($app) {
     $response = $app->getResponseFactory()->createResponse();
-
+        return null;
         if ($exception instanceof HttpNotFoundException) {
             $message = 'not found';
             $code = 504;
