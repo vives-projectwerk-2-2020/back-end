@@ -31,17 +31,18 @@ $containerBuilder['notFoundHandler'] = function ($containerBuilder) {
 // Build PHP-DI Container instance
 $container = $containerBuilder->build();
 
-//overwrite notfoundhanler to return 404
-$container['notFoundHandler'] = function ($c) {
-    return function ($request, $response) use ($c) {
-        $error = json_encode("route not found");
-        return $c['response']->withJson($error, 404);
-    };
-};
 
 // Instantiate the app
 AppFactory::setContainer($container);
 $app = AppFactory::create();
+
+//overwrite notfoundhanler to return 404
+$container['notFoundHandler'] = function ($app) {
+    return function ($request, $response) use ($app) {
+        $error = json_encode("route not found");
+        return $app['response']->withJson($error, 400);
+    };
+};
 
 // Register middleware
 $app->addRoutingMiddleware();
