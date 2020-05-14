@@ -36,14 +36,6 @@ $container = $containerBuilder->build();
 AppFactory::setContainer($container);
 $app = AppFactory::create();
 
-//overwrite notfoundhanler to return 404
-$container['notFoundHandler'] = function ($app) {
-    return function ($request, $response) use ($app) {
-        $error = json_encode("route not found");
-        return $app['response']->withJson($error, 400);
-    };
-};
-
 // Register middleware
 $app->addRoutingMiddleware();
 $app->addBodyParsingMiddleware();
@@ -59,6 +51,15 @@ $routes($app);
 
 $app->getContainer()->get('Illuminate\Database\Capsule\Manager');
 $app->getContainer()->get('influxDB');
+
+//overwrite notfoundhanler to return 404
+unset($app->getContainer()['notFoundHandler']);
+$app->getContainer()['notFoundHandler'] = function ($container) {
+    return function ($request, $response) use ($container) {
+        $error = json_encode("route not found");
+        return $response->withJson($error, 400);
+    };
+};
 
 // Run app
 $app->run();
