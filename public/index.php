@@ -27,10 +27,27 @@ $container = $containerBuilder->build();
 AppFactory::setContainer($container);
 $app = AppFactory::create();
 
+// Define Custom Error Handler
+$customErrorHandler = function (
+    Psr\Http\Message\ServerRequestInterface $request,
+    \Throwable $exception,
+    bool $displayErrorDetails,
+    bool $logErrors,
+    bool $logErrorDetails
+) use ($app) {
+    $response = $app->getResponseFactory()->createResponse();
+    // seems the followin can be replaced by your custom response
+    // $page = new Alvaro\Pages\Error($c);
+    // return $page->notFound404($request, $response);
+    $response->withJson(404);
+    return $response;
+};
+
 // Register middleware
 $app->addRoutingMiddleware();
 $app->addBodyParsingMiddleware();
-$app->addErrorMiddleware(true, true, true);
+$errorMiddleware = $app->addErrorMiddleware(true, true, true);
+$errorMiddleware->setErrorHandler(Slim\Exception\HttpNotFoundException::class, $customErrorHandler);
 
 // Register middleware
 $middleware = require __DIR__ . '/../src/middleware.php';
