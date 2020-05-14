@@ -20,14 +20,6 @@ $settings($containerBuilder);
 $dependencies = require __DIR__ . '/../src/dependencies.php';
 $dependencies($containerBuilder);
 
-//overwrite notfoundhanler to return 404
-$containerBuilder['notFoundHandler'] = function ($containerBuilder) {
-    return function ($request, $response) use ($containerBuilder) {
-        $error = json_encode("route not found");
-        return $response->withJson($error, 404);
-    };
-};
-
 // Build PHP-DI Container instance
 $container = $containerBuilder->build();
 
@@ -39,8 +31,6 @@ $app = AppFactory::create();
 $app->addRoutingMiddleware();
 $app->addBodyParsingMiddleware();
 $app->addErrorMiddleware(true, true, true);
-$errorHandler = $errorMiddleware->getDefaultErrorHandler();
-$errorHandler->registerErrorRenderer('json', ErrorController::class);
 
 // Register middleware
 $middleware = require __DIR__ . '/../src/middleware.php';
@@ -52,15 +42,6 @@ $routes($app);
 
 $app->getContainer()->get('Illuminate\Database\Capsule\Manager');
 $app->getContainer()->get('influxDB');
-
-// //overwrite notfoundhanler to return 404
-// unset($app->getContainer()['notFoundHandler']);
-// $app->getContainer()['notFoundHandler'] = function ($container) {
-//     return function ($request, $response) use ($container) {
-//         $error = json_encode("route not found");
-//         return $response->withJson($error, 400);
-//     };
-// };
 
 // Run app
 $app->run();
