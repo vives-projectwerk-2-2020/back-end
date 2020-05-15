@@ -55,12 +55,12 @@ in this case we add the pm2.5 value of the sensor for the past 1h.
 
 This can also be displayed thanks to insomnia:
 
-![](images/insomnia.png)
+![](images/insomnia1.png)
 
 When values greater than 1h (24h, 7d, 30d, 1y, 3y, all) are requested, averages are used so that the number of responses is limited to 300-400.
 When you request data that is not yet in the database, you will receive NULL for the nonexistent data as shown below.
 
-![](images/insomniaOld.png)
+![](images/insomniaOld1.png)
 
 Additional information related to the structure of this application can be found at: [SwaggerHub Particula](https://app.swaggerhub.com/apis-docs/sillevl/Particula)
 
