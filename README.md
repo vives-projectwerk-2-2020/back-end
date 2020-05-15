@@ -36,14 +36,14 @@ vendor/bin/phinx create MyNewMigration
 
 ## api-data-influxdb
 
-De Hisorische data kan je opvragen door volgende stappen te volgen.
-Van een sensor kunnen de peetingen opgevraagd worden via volgende url door gebruik te maken van zijn GUID.
+The historical data is accessible by following these steps.
+The measurements of a sensor can be requested via the following url using its GUID.
 
 ```
 https://develop.particula.devbitapp.be/measurements/{GUID}
 ```
 
-Om data te kunnen weergeven moet je een periode meegeven: (Available values : 1h, 24h, 7d, 30d, 1y, 3y, all)
+To be able to display data you have to enter a period: (Available values: 1h, 24h, 7d, 30d, 1y, 3y, all)
 
 Default value : 24h
 
@@ -51,21 +51,18 @@ Default value : 24h
 https://develop.particula.devbitapp.be/measurements/{GUID}?period=1h&properties=pm2.5
 ```
 
-in dit geval voegen we de pm2.5 waarde van de sensor toe en dit voor het afgelopen 1h.
+in this case we add the pm2.5 value of the sensor for the past 1h.
 
-Dit kan ook weergegeven worden dankzij insomnia:
+This can also be displayed thanks to insomnia:
 
-![](images/insomnia.PNG)
+![](images/insomnia1.png)
 
-Wanneer waarden worden opgevraagt die groter zijn dan 1h (24h, 7d, 30d, 1y, 3y, all) wordt er gebruik gemaakt van gemiddeldes dit zodat het aantal responses beperkt blijft tot een 300-400 tal. 
+When values greater than 1h (24h, 7d, 30d, 1y, 3y, all) are requested, averages are used so that the number of responses is limited to 300-400.
+When you request data that is not yet in the database, you will receive NULL for the nonexistent data as shown below.
 
-![](images/insomniaMean.PNG)
+![](images/insomniaOld1.png)
 
-Wanneer u data opvraagt die nog niet in de data base staat ontvangt u NULL voor de niet bestaande data zoals te zien is hieronder.
-
-![](images/insomniaOld.PNG)
-
-Extra informatie in verband met de structuur van deze toepassing is te vinden op `https://app.swaggerhub.com/apis-docs/sillevl/Particula/0.1#/`
+Additional information related to the structure of this application can be found at: [SwaggerHub Particula](https://app.swaggerhub.com/apis-docs/sillevl/Particula)
 
 ## Routes for MariaDB
 
@@ -176,3 +173,10 @@ To run a database migration use the command:
 ```bash
 composer migrate
 ```
+
+### Unfinished
+
+- Back-end API & Authentication API have the same functionality implemented
+  - Authentication API uses query's from back-end
+- Particle from SwaggerHub is not implemented
+- Non-existing sensor should return 404
