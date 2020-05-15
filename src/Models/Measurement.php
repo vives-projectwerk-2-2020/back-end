@@ -97,7 +97,7 @@ class Measurement
             $errorMessage = array("ERROR"=>"400 Invalid properties");
         }
 
-        $query = "select $meanProperties FROM sensors WHERE sensor_id = /$id/ 
+        $query = "select $meanProperties FROM sensors WHERE sensor_id = '$id' 
             $time $new_date $groupBy";
 
         $result = $database->query($query);
