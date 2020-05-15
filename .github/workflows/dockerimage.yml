@@ -6,8 +6,8 @@ on:
   pull_request:
     branches: [ develop, master ]
 env:
-  IMAGE_NAME: particula-back-end 
-jobs:  
+  IMAGE_NAME: particula-back-end
+jobs:
 
   build:
     runs-on: ubuntu-latest
@@ -16,8 +16,7 @@ jobs:
     - name: Branch name
       id: branchname
       run: |
-        echo "::set-output name=branch::`echo '${{ github.ref }}' | sed -e 's,.*/\(.*\),\1,'`"
-            
+        echo "::set-output name=branch::`echo '${{ github.ref }}' | sed -e 's,.*/\(.*\),\1,'`"        
     - uses: actions/checkout@v2
     - uses: whoan/docker-build-with-cache-action@master
       with:
@@ -35,11 +34,11 @@ jobs:
     - name: executing remote ssh commands using password
       uses: appleboy/ssh-action@master
       with:
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USERNAME }}
-        key: ${{ secrets.KEY }}
-        port: ${{ secrets.PORT }}
+        host: ${{ secrets.DEPLOYMENT_SERVER_HOST }}
+        username: ${{ secrets.DEPLOYMENT_SERVER_USERNAME }}
+        key: ${{ secrets.DEPLOYMENT_SERVER_KEY }}
+        port: ${{ secrets.DEPLOYMENT_SERVER_PORT }}
         script: |
-          cd ${{ secrets.PATH }}
+          cd ${{ secrets.DEPLOYMENT_SERVER_PATH }}
           docker-compose pull backend
           docker-compose up -d backend

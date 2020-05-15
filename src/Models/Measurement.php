@@ -17,13 +17,17 @@ class Measurement
     public static function all()
     {
         $database = self::$database;
-        $result = $database->query('select * from sensors WHERE time > now() - 1h GROUP BY guid');
+        $result = $database->query('select * from sensors WHERE time > now() - 1h GROUP BY sensor_id');
         return $result->getPoints();
     }
 
     public static function find($id, $period, $properties)
     {
         $database = self::$database;
+
+        //convert guid to dev_id
+        $sensor = Sensor::find($id);
+        $id = $sensor->name;
 
         //put the time parameter in easier to process way
         $period_range =  substr($period, -1);
@@ -52,7 +56,7 @@ class Measurement
             $time = "";
             $new_date = "";
         } elseif ($period == "last") {
-            $groupBy = " LIMIT 1";
+            $groupBy = " order by desc LIMIT 1";
             $time = "";
             $new_date = "";
             $meanProperties = $properties;
@@ -76,7 +80,7 @@ class Measurement
         }
 
         if ($properties == "all" || $properties == "") {
-            if ($new_date == "1h") {
+            if ($new_date == "1h" || $period == "last") {
                 $meanProperties = "pm10,humidity,pm25,
                 pressure,temperature";
             } else {
@@ -89,7 +93,7 @@ class Measurement
             $errorMessage = "{\"ERROR\": \"400 Invalid properties\"}";;
         }
 
-        $query = "select $meanProperties FROM sensors WHERE guid =~ /$id/ 
+        $query = "select $meanProperties FROM sensors WHERE sensor_id =~ /$id/ 
             $time $new_date $groupBy";
 
         $result = $database->query($query);
@@ -97,7 +101,11 @@ class Measurement
         $decoded = $result->getPoints();
 
         if ($errorMessage == "" &&  empty($decoded)) {
+<<<<<<< HEAD
             $errorMessage = "{\"ERROR\": \"400 Invalid id\"}";
+=======
+            $errorMessage = "ERROR: 400 Invalid id";
+>>>>>>> 85a72d08c4d41720b24077594ba84bdd07e02fe5
         }
 
 

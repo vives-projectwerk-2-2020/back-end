@@ -37,27 +37,21 @@ vendor/bin/phinx create MyNewMigration
 ## api-data-influxdb
 
 De Hisorische data kan je opvragen door volgende stappen te volgen.
-Eerst roepen we de server aan op de poort van de backend, hier vermelden we bij 
-dat we de meetingen willen opvragen:
+Van een sensor kunnen de peetingen opgevraagd worden via volgende url door gebruik te maken van zijn GUID.
 
 ```
-http://develop.particula.devbitapp.be:8080/measurements
+https://develop.particula.devbitapp.be/measurements/{GUID}
 ```
 
-door hierbij het id toe te voegen krijg je een specifieke sensor:
-
-```
-http://develop.particula.devbitapp.be:8080/measurements/nico-prototype-l432
-```
-
-Om data te kunnen weergeven moet je een periode: (Available values : 1h, 24h, 7d, 30d, 1y, 3y, all)
+Om data te kunnen weergeven moet je een periode meegeven: (Available values : 1h, 24h, 7d, 30d, 1y, 3y, all)
 
 Default value : 24h
+
 ```
-http://develop.particula.devbitapp.be:8080/measurements/nico-prototype-l432?period=1d&properties=pm2.5
+https://develop.particula.devbitapp.be/measurements/{GUID}?period=1h&properties=pm2.5
 ```
 
-in dit geval voegen we de pm2.5 waarde van de sensor van nico dit van de afgelopen 1h.
+in dit geval voegen we de pm2.5 waarde van de sensor toe en dit voor het afgelopen 1h.
 
 Dit kan ook weergegeven worden dankzij insomnia:
 
@@ -84,35 +78,35 @@ The sensors table can be managed using GET, POST, PUT and DELETE request. More i
 All sensors with their information can be obtained with following GET request:
 
 ```
-GET http://<ip>:<port>/sensors
+GET https://<ip>/sensors
 ```
 
-The format of the result is specified at [SwaggerHub Particula](https://app.swaggerhub.com/apis-docs/sillevl/Particula/0.1#/), for example:
+The format of the result is specified at [SwaggerHub Particula](https://app.swaggerhub.com/apis-docs/sillevl/Particula), for example:
 
 ![GET request sensors](images/get_sensors.jpg)
 
 A sensor can be added to the database sending following POST request:
 
 ```
-POST http://<ip>:<port>/sensors
+POST https://<ip>/sensors
 ```
 
 A sensor can only be created if all information is entered:
 
-![POST request sensors](images/post_sensors.jpg)
+![POST request sensors](images/get_sensors.jpg)
 
-A sensor can be edited by using the sensor id:
+A sensor can be edited by using the sensor GUID:
 
 ```
-PUT http://<ip>:<port>/sensors/{id}
+PUT https://<ip>/sensors/{GUID}
 ```
 
 ![PUT request sensors](images/put_sensors.jpg)
 
-Finally a sensor can be removed by its id:
+Finally a sensor can be removed by its GUID:
 
 ```
-DELETE http://<ip>:<port>/sensors/{id}
+DELETE https://<ip>/sensors/{GUID}
 ```
 
 ### Users
@@ -122,7 +116,7 @@ Users can be managed using a GET, POST, PUT or DELETE request. More information 
 A list of users can be found using:
 
 ```
-GET http://<ip>:<port>/users
+GET https://<ip>/users
 ```
 
 ![GET request users](images/get_users.jpg)
@@ -130,13 +124,13 @@ GET http://<ip>:<port>/users
 The information of one user can be found by adding the username to the previous request:
 
 ```
-GET http://<ip>:<port>/users/{username}
+GET https://<ip>/users/{username}
 ```
 
 A new user can be added as follows:
 
 ```
-POST http://<ip>:<port>/users
+POST https://<ip>/users
 ```
 
 A user can only be added if all of the following information is provided:
@@ -146,7 +140,7 @@ A user can only be added if all of the following information is provided:
 A user can be updated by its username:
 
 ```
-PUT http://<ip>:<port>/users/{username}
+PUT https://<ip>/users/{username}
 ```
 
 ![PUT request users](images/put_users.jpg)
@@ -154,7 +148,7 @@ PUT http://<ip>:<port>/users/{username}
 At last a user can be deleted using a username:
 
 ```
-DELETE http://<ip>:<port>/users/{username}
+DELETE https://<ip>/users/{username}
 ```
 
 ## Development

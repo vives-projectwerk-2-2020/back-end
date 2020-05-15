@@ -27,10 +27,35 @@ $container = $containerBuilder->build();
 AppFactory::setContainer($container);
 $app = AppFactory::create();
 
+// // Define Custom Error Handler
+// $customErrorHandler = function (
+//     Psr\Http\Message\ServerRequestInterface $request,
+//     \Throwable $exception,
+//     bool $displayErrorDetails,
+//     bool $logErrors,
+//     bool $logErrorDetails
+// ) use ($app) {
+//     $response = $app->getResponseFactory()->createResponse();
+//         return null;
+//         if ($exception instanceof HttpNotFoundException) {
+//             $message = 'not found';
+//             $code = 504;
+//         } elseif ($exception instanceof HttpMethodNotAllowedException) {
+//             $message = 'not allowed';
+//             $code = 403;
+//         }
+//         // ...other status codes, messages, or generally other responses for other types of exceptions
+
+//     $response->getBody()->write($message);
+//     return $response->withStatus($code);
+// };
+
 // Register middleware
 $app->addRoutingMiddleware();
 $app->addBodyParsingMiddleware();
-$app->addErrorMiddleware(true, true, true);
+$errorMiddleware = $app->addErrorMiddleware(true, true, true);
+// $errorMiddleware->setDefaultErrorHandler($customErrorHandler);
+// $app->add($errorMiddleware);
 
 // Register middleware
 $middleware = require __DIR__ . '/../src/middleware.php';

@@ -3,6 +3,7 @@
 namespace Sensors;
 
 use Phinx\Migration\AbstractMigration;
+use Phinx\Util\Literal;
 
 class Sensors extends AbstractMigration
 {
@@ -36,13 +37,13 @@ class Sensors extends AbstractMigration
         // create the table
         $table = $this->table('sensors', ['id' => false, 'primary_key' => 'guid']);
         $table
-            ->addColumn('guid', 'string')
+            ->addColumn('guid', 'uuid', ['default' => Literal::from('UUID()')])
             ->addColumn('name', 'string')
             ->addColumn('latitude', 'float')
             ->addColumn('longitude', 'float')
             ->addColumn('city', 'string')
             ->addColumn('address', 'string')
             ->addColumn('description', 'string')
-            ->create();
+            ->save();
     }
 }
