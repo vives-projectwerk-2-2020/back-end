@@ -46,10 +46,14 @@ class Measurement
 
         $validProperties = $properties != "all" && $properties != "" && $properties != "pm10"
             && $properties != "humidity" && $properties != "pm25" && $properties != "pressure"
-            && $properties != "temperature";
+            && $properties != "temperature" && $properties != "particle";
 
         $meanProperties = "MEAN($properties) as $properties";
         $time = " AND time > now() - ";
+
+        if ($properties == "particle") {
+            $meanProperties = "MEAN(pm25) as pm25,MEAN(pm10) as pm10";
+        }
 
         if ($period == "all") {
             $groupBy = " GROUP BY time(3d)";
