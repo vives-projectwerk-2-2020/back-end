@@ -176,3 +176,9 @@ To run a database migration use the command:
 ```bash
 composer migrate
 ```
+
+### Unfinished
+
+- Back-end API & Authentication API have the same functionality implemented
+  - Authentication API uses query's from back-end
+- Particle from SwaggerHub is not implemented
