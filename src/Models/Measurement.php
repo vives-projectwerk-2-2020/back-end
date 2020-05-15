@@ -101,11 +101,7 @@ class Measurement
         $decoded = $result->getPoints();
 
         if ($errorMessage == "" &&  empty($decoded)) {
-<<<<<<< HEAD
             $errorMessage = "{\"ERROR\": \"400 Invalid id\"}";
-=======
-            $errorMessage = "ERROR: 400 Invalid id";
->>>>>>> 85a72d08c4d41720b24077594ba84bdd07e02fe5
         }
 
 
