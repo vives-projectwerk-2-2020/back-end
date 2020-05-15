@@ -179,3 +179,4 @@ composer migrate
 - Back-end API & Authentication API have the same functionality implemented
   - Authentication API uses query's from back-end
 - Particle from SwaggerHub is not implemented
+- Non-existing sensor should return 404
